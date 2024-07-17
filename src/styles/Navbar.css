@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* body {
+    height: 100vh;
+    background-image: url('../static/fondo-home.png');
+    background-size: cover;
+    background-position: center;
+} */
+
+li {
+    list-style: none !important;
+}
+
+.login a {
+    text-decoration: none !important;
+    font-size: 1rem !important;
+    color: #fff ;
+}
+.dropdown-menu-navb a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.login a:hover {
+    color: #000 !important;
+}
+
+.header {
+    display: flex !important;
+    flex-direction: row !important;
+    position: relative !important;
+
+}
+
+.logo{
+    width: auto !important;
+    height: auto !important;
+    margin-top: 2% !important;
+    margin-left: 5% !important;
+    align-items: center !important;
+}
+
+.navbar {
+    width: 80% !important;
+    height: auto !important;
+    max-width: 80% !important;
+    margin: 2% auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content:flex-end !important;
+    justify-items: flex-end !important;
+    gap: 1.5rem;
+}
+
+.links {
+    display: flex !important;
+    gap: 2rem !important;
+    display: none !important;
+}
+
+.links li:hover {
+    scale: 1.2 !important;
+}
+
+.logo-compara {
+    height: 50px !important;
+}
+
+.login-compara {
+    height: 30px !important;
+}
+
+.toggle-btn{
+    display: flex !important;
+    gap: 1.5rem !important;
+}
+
+.bars-solid {
+    cursor: pointer !important;
+    height: 50px !important;
+}
+
+.close-solid {
+    cursor: pointer !important;
+    height: 50px !important;
+}
+
+.login {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 1rem !important;
+}
+
+.logo-peq{
+    height: 50px !important;
+}
+
+/* DROPDOWN MENU */
+
+.dropdown-menu-navb{
+    display: none !important;
+    position: absolute !important;
+    /* right: 4rem; */
+    top: 100% !important;
+    height: 0 !important;
+    width: 100% !important;
+    background: linear-gradient(90deg, #5DBCA3 0%, #008DC7 100%) !important;
+    overflow: hidden !important;
+    transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.dropdown-menu li{
+    padding: 0.7rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.dropdown-menu.open{
+    display: block !important;
+    height: auto !important;
+    z-index: 3 !important;
+}
+
+
+
+/* RESPONSIVE */
+@media (orientation: portrait) {
+
+    .navbar{
+        width: 35% !important;
+    }
+
+    .links, .login {
+        display: none !important;
+    }
+
+    .bars-solid {
+        display: block !important;
+        height: 30px !important;
+    }
+
+    .login-compara {
+        height: 25px !important;
+    }
+
+    .logo-compara {
+        height: 50px !important;
+    }
+
+    .logo-peq{
+        height: 35px !important;
+    }
+
+    .toggle-btn{
+        align-items: center !important;
+        gap: 0.9rem !important;
+    }
+    
+    .dropdown-menu{
+        display: block !important;
+
+    }
+
+    .dropdown-menu.open{
+        display: block !important;
+        height: auto !important;
+        z-index: 3 !important;
+    }
+}
