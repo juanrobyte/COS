@@ -1,0 +1,245 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: local('Montserrat'), url(./static/Fonts/Montserrat-Medium.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'MontserratB';
+    src: local('MontserratB'), url(./static/Fonts/Montserrat-Bold.ttf) format('truetype');
+  }
+  
+
+.modal {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(0, 0, 0, 0.75);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.is-open {
+    display: flex;
+}
+
+.modal-container {
+    position: relative;
+    width: 60%;
+    height: 90vh;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #808080;
+    border-radius: 20px;
+}
+.modalBody{
+    padding: 1rem;
+    color: #000; 
+    flex: 1;
+}
+
+.modal-container::-webkit-scrollbar{
+    display: none;
+}
+
+.boton-contain {
+    width: 100%;
+    height: 5%;
+    background-color: #EFF8F5;
+    margin: 0;
+}
+
+.boton-container {
+    width: 100%;
+    background: #EFF8F5;
+    margin: 0;
+    padding: 30px 10px;
+    top: 0;
+    right: 0;
+}
+
+.modal-close {
+    border: none;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: right;
+    align-items: flex-end;
+}
+.planes-card2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 20px;
+    gap: 35px;
+}
+.subtext{
+    color: #959999;
+    font-family: 'Montserrat';
+    font-size: 13px;
+    font-weight: 700;
+    line-height: normal!important;
+}
+.namePlan{
+    color: #009C8C;
+    font-family: 'MontserratB';
+    font-size: 32px;
+}
+.pricePlan{
+    color:#008DC7;
+    font-size: 32px;
+    font-family: 'MontserratB';
+}
+.headlineText{
+    font-family: 'Montserrat';
+    font-size: 26px;
+    font-weight: 600;
+    color: #009C8C;
+}
+.headerText{
+    display: flex;
+    align-items: center;
+    padding: 30px 5px;
+    gap: 10px;
+    margin-left: 5%;
+}
+.html-content{
+    padding: 25px 50px;
+}
+.modal-close img {
+    height: 30px;
+}
+
+.coberturas-botones {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    justify-content: space-around;
+    padding: 5%;
+}
+
+.boton-cobertura {
+    display: flex;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 50px;
+    padding: 10px;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+}
+.cards{
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.planes-card {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px;
+    border: 1px solid #009c8c;
+    border-radius: 25px;
+}
+
+.img-card-planes {
+    height: 50px;
+}
+
+.img-card-planes2 {
+    height: 30px;
+}
+.coberturas-comparar h2, .coberturas-comparar2 h2 {
+    font-family: 'Montserrat';
+    color: #666;
+    font-size: 24px;
+    font-weight: 500;
+}
+.included{
+    color: #009C8C;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 24px;
+}
+.notIncluded{
+    color: #111;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 24px;
+}
+.boton-contratar {
+    display: flex;
+    text-decoration: none;
+    background-color: #008DC7;
+    border-radius: 50px;
+    padding: 10px;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+}
+
+.coberturas-comparar {
+    display: flex;
+    width: auto;
+    border-radius: 15px;
+    height: auto;
+    background-color: #EFF8F5;
+    text-align: start;
+    padding: 2%;
+    margin-top: 10px;
+}
+
+.coberturas-comparar2 {
+    display: flex;
+    width: auto;
+    border-radius: 15px;
+    height: auto;
+    background-color: transparent;
+    text-align: start;
+    padding: 2%;
+    margin-top: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.coberturas-precio-plan {
+    height: auto;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 10px;
+    justify-content: space-around;
+}
+
+.coberturas-precio-plan p {
+    font-size: medium;
+    text-align: center;
+    font-weight: bolder;
+}
+
+
+@media (orientation: portrait) {
+    .modal-container {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        border: 0;
+    }
+}

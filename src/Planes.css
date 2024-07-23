@@ -1,0 +1,674 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: local('Montserrat'), url(./static/Fonts/Montserrat-Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'MontserratB';
+  src: local('MontserratB'), url(./static/Fonts/Montserrat-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Diavlo Black Light';
+  src: local('Diavlo Black'), url(./static/Fonts/diavlo-black/Diavlo_LIGHT_II_37.otf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Diavlo Black';
+  src: local('Diavlo Black'), url(./static/Fonts/diavlo-black/Diavlo_BLACK_II_37.otf) format('truetype');
+}
+
+#planes {
+  background: #f5f7f8;
+}
+
+.content-info-pasajero {
+  margin-top: 2%;
+  width: 90%;
+  height: 15vh;
+  display: flex;
+  flex-direction: row;
+  border-radius: 25px;
+  background: #008DC7;
+  color: white;
+  align-items: center;
+  align-self: center;
+}
+
+.fechas {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  /* height: 58%; */
+  align-items: center;
+  width: 33%;
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  text-align: justify;
+  justify-content: space-evenly;
+}
+
+.fechas img {
+  height: 30px;
+}
+
+.origen-destino {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px;
+  /* height: 58%; */
+  align-items: center;
+  width: 33%;
+  justify-content: space-evenly;
+}
+
+.origen-destino img {
+  height: 30px;
+}
+
+.viajeros {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  /* height: 58%; */
+  width: 33%;
+  align-items: center;
+}
+
+
+.boton-editar {
+  height: 20px;
+}
+
+.content-planes-filtros {
+  padding-bottom: 8%;
+  margin-top: 2%;
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+}
+
+.filtros-comparar {
+  padding: 25px 10px;
+  height: fit-content;
+  width: 20%;
+  box-shadow: 0px 0px 8px 0px #919191c4;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+
+.box-filtros {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  /* margin: auto; */
+  border-radius: 10px;
+  gap: 50px;
+}
+
+.cobertura-comparar {
+  display: flex;
+  gap: 1rem;
+}
+
+.rango-precio {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+
+.precios-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.precio-minimo {
+  width: 40%;
+  border-radius: 5px;
+  border: 1px solid #808080;
+  appearance: none;
+}
+
+.precio-maximo {
+  width: 40%;
+  border-radius: 5px;
+}
+
+#range-slider-gradient {
+  border-radius: 12px;
+  background: #5DBCA3;
+}
+
+#range-slider-gradient .range-slider__thumb {
+  border: 1px solid #808080;
+  box-sizing: border-box;
+}
+
+#range-slider-gradient .range-slider__thumb[data-lower] {
+  background: #fff;
+}
+
+#range-slider-gradient .range-slider__thumb[data-upper] {
+  background: #fff;
+}
+
+.box-planes {
+  display: flex;
+  height: auto;
+  width: 80%;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+/* .seleccion-plan {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: auto;
+  width: auto;
+  border-bottom: 1px solid black;
+} */
+
+.card-logo-planes {
+  display: flex;
+  justify-content: space-around;
+  height: auto;
+  align-items: center;
+  padding: 5% 0;
+  margin: 0 0 2% 10%;
+  width: 90%;
+  box-shadow: 0px 0px 8px 0px #919191c4;
+  border-radius: 15px;
+  background: white;
+}
+
+.sec1-plan-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: flex-start;
+  width: 30%;
+}
+
+.puntuacion {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  border-radius: 0 20px 20px 0;
+  height: 50px;
+  color: #fff;
+  width: 70%;
+}
+
+
+.box-planes .card-logo-planes:nth-of-type(1) .puntuacion {
+  background: #5644d8;
+}
+
+.box-planes .card-logo-planes:nth-of-type(2) .puntuacion {
+  background: #030227;
+}
+
+.box-planes .card-logo-planes:nth-of-type(3) .puntuacion {
+  background: #29937b;
+}
+
+
+.puntuacion p {
+  margin: 0;
+}
+
+.star-img {
+  height: 20px;
+}
+
+.img-card-logo {
+  align-self: center;
+  height: 50px;
+  margin: auto;
+}
+
+.card-plan-info {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 45%;
+  text-align: justify;
+  gap: 1rem;
+}
+
+.card-plan-info p {
+  line-height: 2rem;
+}
+
+h3 {
+  margin: 0 0 5% 5%;
+}
+
+.contentFocusCover {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 15px;
+  align-items: center;
+
+}
+
+.d-inline-flex {
+  background: none !important;
+  border: none !important;
+  padding: 0 0 18px 0 !important;
+}
+
+.rounded-circle {
+  height: 20px !important;
+}
+
+.info-btn-overlay {
+  font-family: 'Montserrat' !important;
+}
+
+.precio-plan {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 25%;
+}
+
+.seleccionar {
+  display: flex;
+  text-decoration: none;
+  background-color: #2C1FBD;
+  border-radius: 50px;
+  padding: 15px 30px;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+}
+
+.seleccionar:hover {
+  color: white;
+}
+
+.comparar-plan {
+  display: flex;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #008DC7;
+}
+
+.coberturas-comparar {
+  display: flex;
+  gap: 10px;
+}
+
+.comparar-check {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  align-self: baseline;
+  color: #008DC7;
+  gap: 5px;
+}
+
+.comparar-check p {
+  margin: 0;
+}
+
+.comparar-boton {
+  display: flex;
+  text-decoration: none;
+  background-color: #5DBCA3;
+  border-radius: 20px;
+  padding: 5px 10px;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  gap: 1.5rem;
+  cursor: pointer;
+  width: 50%;
+}
+
+.comparar-boton.disabled {
+  background-color: gray;
+  transition: 300ms;
+}
+
+
+.comparar-acordeon {
+  width: 20%;
+  position: fixed;
+  left: 100px;
+  bottom: 0;
+  z-index: 50;
+}
+
+.accordion-button {
+  background: #5DBCA3 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0px !important;
+  box-shadow: none !important;
+}
+
+.accordion-button.collapsed {
+  background: #5DBCA3;
+  color: white;
+}
+
+.accordion-item {
+  height: auto;
+  border: none !important;
+}
+
+.acordeon-box {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.cards-acordeon {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card-acordeon {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e1e1e1;
+  justify-content: space-between;
+  align-items: center;
+  height: 20%;
+  border-radius: 10px;
+  gap: 1rem;
+  padding: 10px;
+  margin: 1rem 1rem;
+  position: relative;
+
+}
+
+
+
+.img-card-acordeon {
+  height: 30px;
+}
+
+.card-acordeon2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 20%;
+  border-radius: 10px;
+  background: #f5f7f8;
+  padding: 20px 40px 20px 40px;
+  margin: 1rem 1rem;
+  gap: 0.7rem;
+}
+
+
+.close-buton1 {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  height: 20px;
+}
+
+.close-buton2 {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  height: 20px;
+}
+
+.close-buton3 {
+  position: absolute;
+  top: 235px;
+  right: 200px;
+  height: 20px;
+}
+
+.close-buton4 {
+  position: absolute;
+  top: 235px;
+  right: 32px;
+  height: 20px;
+}
+
+.cobertura-check {
+  height: 20px;
+}
+
+.plus-img {
+  height: 25px;
+  margin-right: 1rem;
+  margin-bottom: 1px;
+}
+
+.ver-mas-beneficios {
+  text-decoration: none;
+  cursor: pointer;
+  font-family: 'Montserrat';
+  font-weight: bolder;
+}
+
+.lo-que-img {
+  height: 25px;
+  margin-right: 1rem;
+  margin-bottom: 1px;
+}
+
+.lo-que-debes-saber {
+  text-decoration: none;
+  cursor: pointer;
+  font-family: 'Montserrat';
+  font-weight: bolder;
+}
+
+@media (orientation: portrait) {
+
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  .home {
+    justify-content: flex-start;
+  }
+
+  .content-info-pasajero {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    margin: 0;
+    background: #FFF;
+    color: #959999;
+  }
+
+  .container-info-pasajero {
+    width: 70%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .origen-destino {
+    width: 100%;
+    justify-content: flex-start;
+    height: 1vh;
+  }
+
+  .fechas {
+    width: 100%;
+    justify-content: flex-start;
+    height: 1vh;
+  }
+
+  .viajeros {
+    width: 100%;
+    justify-content: flex-start;
+    height: 1vh;
+  }
+
+  .botones-info-pasajeros {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 30%;
+  }
+
+  .boton-editar {
+    height: 30px;
+    width: 30px;
+  }
+
+  .content-planes-filtros {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25%;
+    padding-top: 5%;
+  }
+
+  .box-planes {
+    width: 100%;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .card-logo-planes {
+    width: 80%;
+    padding: 0;
+    margin: 0;
+    height: 40vh;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-radius: 20px;
+    flex-direction: column;
+  }
+
+  .sec1-card-planes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .sec1-plan-card {
+    flex-direction: column-reverse;
+    width: 50%;
+    justify-content: space-evenly;
+    gap: 1rem;
+  }
+
+  .botones-plan-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    gap: 10px;
+    width: 100%;
+    height: auto;
+    margin-top: 10%;
+  }
+
+  .puntuacion {
+    width: 200px;
+    height: 40px;
+    margin-top: 5%;
+  }
+
+  .img-card-logo {
+    align-self: flex-start;
+    width: 120px;
+    height: 40px;
+    margin: 0;
+    margin-left: 10%;
+  }
+
+  .card-plan-info {
+    display: none;
+  }
+
+  .card-plan-info1 {
+    flex-direction: column;
+    text-align: center;        
+    display: flex;
+    justify-content: center;
+    width: 35%;     
+    align-items: flex-start;
+    margin-top: 21%;
+  }
+
+  .card-plan-info1 p{
+    color: #009C8C;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  .nombre-plan {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 29px;
+    text-align: left;
+  }
+
+  .contentFocusCover {
+    display: none;
+  }
+
+  .ver-mas-beneficios {
+    display: none;
+  }
+
+  .lo-que-debes-saber {
+    display: none;
+  }
+
+  .precio-plan {
+    display: flex;
+  }
+
+
+
+  .comparar-acordeon {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+  }
+}
