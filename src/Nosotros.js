@@ -12,7 +12,7 @@ function Nosotros() {
   const [menuVisible, setMenuVisible] = useState(false);
   const [isOpen, setIsOpen] = useState(false)
   let navigate = useNavigate()
-// h
+
 
   return (
     <div className='home'>

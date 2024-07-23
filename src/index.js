@@ -43,7 +43,7 @@ const router = createBrowserRouter([
   
 ]);
 
-// h
+
 root.render(
   <ParallaxProvider>
     <React.StrictMode>

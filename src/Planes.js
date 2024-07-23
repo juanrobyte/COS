@@ -555,7 +555,7 @@ function Planes() {
       </MediaQuery>
 
 
-      {/* <Footer /> h*/}
+      {/* <Footer /> */}
     </div>
 
 

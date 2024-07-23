@@ -367,7 +367,7 @@ function App() {
                     </div>
                   )
                 })}
-{/* h */}
+
               </div>
               <div className="columna3">
                 <input type='submit' className='listo' value='Listo' onClick={() => {

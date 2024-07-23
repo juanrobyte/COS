@@ -22,7 +22,7 @@ function Planes() {
     else{
         setSecurePlans(data.data.securePlans)
     }
-// h
+
   },[])
     console.log(data)
   return (
