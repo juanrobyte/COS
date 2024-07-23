@@ -4,7 +4,7 @@ import "../navb.css"
 import logo from "../static/CS blanco.png"
 
 function Footer() {
-
+// h
 
   return (
     <div className='footer'>

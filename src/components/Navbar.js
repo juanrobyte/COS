@@ -6,7 +6,7 @@ import login from '../static/login3.svg'
 import barsBlack from '../static/bars-solid.svg'
 import bars from '../static/bars-solid (white).svg'
 import closei from '../static/xmark-solid.svg'
-
+// h
 const Navbar = ({ menuVisible, setMenuVisible, section }) => {
     console.log(section)
     return ( 

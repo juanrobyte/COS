@@ -17,7 +17,7 @@ function Products() {
   return (
     <div className='home'>
       <Navbar menuVisible={menuVisible} setMenuVisible={setMenuVisible}></Navbar>
-    {/* <div className={`App ${isOpen && "openz"}`}>
+    {/* h<div className={`App ${isOpen && "openz"}`}>
       <div className='sec-3'>
         <div className={`navb navb2 ${isOpen && "openx"}`} >
         <div className={`navb_items ${isOpen && "open"}`}>
