@@ -1,0 +1,66 @@
+.seccion-promociones .carousel-container {
+  width: 100%;
+  height: auto; /* O un valor fijo si lo prefieres */
+  overflow: hidden; /* Para evitar cualquier desbordamiento */
+}
+
+.seccion-promociones .carousel-item {
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: visible !important;
+}
+
+.seccion-promociones .carousel-image {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  display: block !important;
+  visibility: visible !important;
+  object-fit: cover !important;
+  opacity: 1 !important;
+  filter: none !important; /* Elimina cualquier filtro de opacidad */
+}
+
+.seccion-promociones .slick-slide {
+  margin: 0; /* Elimina cualquier margen adicional */
+  padding: 0; /* Elimina cualquier padding adicional */
+}
+
+.seccion-promociones .slick-list {
+  height: auto; /* Ajusta la altura automáticamente */
+  margin: 0; /* Elimina cualquier margen extra */
+  padding: 0; /* Elimina cualquier padding extra */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.seccion-promociones .slick-prev,
+.seccion-promociones .slick-next {
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  top: 50%;
+  transform: translate(0, -50%);
+  color: #cdcdcd;
+  transition: color 0.3s ease;
+}
+
+.seccion-promociones .slick-prev:hover,
+.seccion-promociones .slick-next:hover {
+  color: #000000; /* Color al hacer hover */
+}
+
+.seccion-promociones .slick-prev {
+  right: 0; /* Ajusta según necesites para acercar las flechas */
+}
+
+.seccion-promociones .slick-next {
+  left: 59.5rem; /* Ajusta según necesites para acercar las flechas */
+}
+
+.seccion-promociones .slick-prev::before,
+.seccion-promociones .slick-next::before {
+  display: none; /* Oculta las flechas predeterminadas */
+}

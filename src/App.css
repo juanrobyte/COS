@@ -1,20 +1,24 @@
 @font-face {
-  font-family: 'Montserrat';
-  src: local('Montserrat'), url(./static/Fonts/Montserrat-Medium.ttf) format('truetype');
+  font-family: "Montserrat";
+  src: local("Montserrat"),
+    url(./static/Fonts/Montserrat-Medium.ttf) format("truetype");
 }
 @font-face {
-  font-family: 'MontserratB';
-  src: local('MontserratB'), url(./static/Fonts/Montserrat-Bold.ttf) format('truetype');
-}
-
-@font-face {
-  font-family: 'Diavlo Black Light';
-  src: local('Diavlo Black'), url(./static/Fonts/diavlo-black/Diavlo_LIGHT_II_37.otf) format('truetype');
+  font-family: "MontserratB";
+  src: local("MontserratB"),
+    url(./static/Fonts/Montserrat-Bold.ttf) format("truetype");
 }
 
 @font-face {
-  font-family: 'Diavlo Black';
-  src: local('Diavlo Black'), url(./static/Fonts/diavlo-black/Diavlo_BLACK_II_37.otf) format('truetype');
+  font-family: "Diavlo Black Light";
+  src: local("Diavlo Black"),
+    url(./static/Fonts/diavlo-black/Diavlo_LIGHT_II_37.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "Diavlo Black";
+  src: local("Diavlo Black"),
+    url(./static/Fonts/diavlo-black/Diavlo_BLACK_II_37.otf) format("truetype");
 }
 
 @keyframes gradient {
@@ -26,17 +30,17 @@
   from {
     height: auto;
   }
-  to{
+  to {
     height: 75%;
   }
 }
 
-input:focus{
+input:focus {
   outline: none;
 }
 
-.select__control{
-  border-radius: 10px!important;
+.select__control {
+  border-radius: 10px !important;
 }
 
 .sec-1 {
@@ -48,100 +52,124 @@ input:focus{
   background-position: center;
 }
 
-.sec-4{
+.sec-4 {
   height: 85vh;
-  background: #E4EBEF;
+  background: #e4ebef;
 }
-.opinionText{
+.opinionText {
   color: white;
-  font-family: 'MontserratB';
+  font-family: "MontserratB";
   padding: 20px;
   font-size: 1.1rem;
-  text-align:center
-
+  text-align: center;
 }
-.cardOpinions{
+.cardOpinions {
   height: 100%;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   margin: auto 0;
-} 
-.cardOp{
+}
+.cardOp {
   height: auto;
-  background: linear-gradient(45deg, #5DBCA3 0%, #008DC7 100%);
+  background: linear-gradient(45deg, #5dbca3 0%, #008dc7 100%);
   width: 68%;
-  cursor: pointer; 
+  cursor: pointer;
   transition: 300ms;
   border-radius: 50px;
   display: flex;
   flex-direction: column;
-  padding: 2px; 
-
+  padding: 2px;
 }
-.opinionImage{
-  width:85%;
+.opinionImage {
+  width: 85%;
   aspect-ratio: 1/1;
   border-radius: 0px 0px 50px 50px;
-
 }
-.imageContainer{
+.imageContainer {
   display: flex;
   align-items: center;
   flex-direction: column;
   flex: 1;
   background: white;
   border-radius: 0px 0px 50px 50px;
-  padding: 15px 0px; 
+  padding: 15px 0px;
   justify-content: space-between;
 }
-.cardOp.focus{
-  transition:500ms;
-  height:75%;
+.cardOp.focus {
+  transition: 500ms;
+  height: 75%;
 }
-.descriptionOpinion{
-  color:#008DC7;
+.descriptionOpinion {
+  color: #008dc7;
   text-align: center;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   width: 85%;
-  font-size: .9rem;
-
+  font-size: 0.9rem;
 }
-.descriptionCTA{
-  font-family: 'MontserratB';
+.descriptionCTA {
+  font-family: "MontserratB";
   font-size: 1.4rem;
-  color: #008DC7;
+  color: #008dc7;
 }
 
 .sec-3 {
   height: 15vh;
   text-align: center;
-
 }
-.edad-viajero{
+.edad-viajero {
   align-self: center;
   align-items: center;
-  width: 100%;
+  text-align: center;
+  width: 100px;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 25px;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  width:30%!important
+  color: black;
+  font-weight: 600;
 }
-.app{
+
+.cantidad-viajero {
+  align-self: center;
+  align-items: center;
+  text-align: center;
+  width: 100px;
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  color: black;
+  font-weight: 600;
+  margin-right: 1.3rem;
+}
+
+.css-18afl1l {
+  width: 45%;
+}
+
+.css-a2wgi5 {
+  font-weight: 600 !important;
+}
+
+.css-x5oh7z:hover {
+  background: #009c8c !important;
+}
+
+.app {
   position: relative;
-
 }
 
-body, .home{
+body,
+.home {
   /* padding: 0 35px; */
   display: flex;
   justify-content: center;
   min-height: 100vh;
   flex-direction: column;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
 }
-.App{
+.App {
   flex-direction: column;
   display: flex;
   margin-bottom: auto;
@@ -150,26 +178,24 @@ body, .home{
 .form {
   justify-content: center;
   flex-direction: column;
-  width:70%;
+  width: 70%;
   margin: auto;
-  position:absolute;
+  position: absolute;
   top: 60vh;
   padding: 30px;
   border-radius: 20px;
   box-shadow: #a2a2a28f 6px 6px 20px 0px;
-  z-index:3;
+  z-index: 3;
   background-color: white;
-  left:0;
-  right:0;
-  
-
+  left: 0;
+  right: 0;
 }
 
 .columna-1 {
   padding: 2% 5%;
   display: flex;
   flex-direction: row;
-  justify-content:space-between;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 2%;
 }
@@ -183,71 +209,163 @@ body, .home{
   margin-bottom: 2%;
 }
 
-.columna-3{
+.columna-3 {
   gap: 5%;
   padding: 0 5%;
   display: flex;
   flex-direction: row;
-  justify-content:flex-end;
+  justify-content: flex-end;
   align-items: center;
 }
 
-.origen, .passengersAmount {
+.origen,
+.passengersAmount {
   width: 30%;
 }
-.passengersAmount{
+.passengersAmount {
   flex-direction: column;
   display: flex;
 }
-.fechaIda, .fechaVuelta, .codigodearea {
+.fechaIda,
+.fechaVuelta,
+.codigodearea {
   width: 10%;
 }
-.basic-single, .basic-multi-select{
+.basic-single,
+.basic-multi-select {
   width: 100%;
-  border: 0px!important;
+  border: 0px !important;
 }
-.basic-single div, .basic-multi-select div{
-  border: 0px!important;
+.basic-single div,
+.basic-multi-select div {
+  border: 0px !important;
 }
 
-
-.phoneNumber{
+.phoneNumber {
   width: 30%;
   align-self: center;
   align-items: center;
   padding: 5px;
   border-radius: 10px;
-  border: 0px!important;
+  border: 0px !important;
   box-sizing: border-box;
 }
-.react-international-phone-input-container > input, .react-international-phone-input-container div, .react-international-phone-input-container button{
-  border:0px!important
+.react-international-phone-input-container > input,
+.react-international-phone-input-container div,
+.react-international-phone-input-container button {
+  border: 0px !important;
 }
-.destino, .email {
+.destino,
+.email {
   width: 40%;
 }
-.email, .phoneNumber, .destino, .origen, .fechainit-fechaend, .passengersAmount, .coupon{
+.email,
+.phoneNumber,
+.destino,
+.origen,
+.fechainit-fechaend,
+.passengersAmount,
+.coupon {
   display: flex;
   flex-direction: row;
-  background-color:#F7F7F7 ; 
-  height: 51px;
-  justify-content: center; 
+  background-color: #f7f7f7;
+  height: 3rem;
+  justify-content: center;
   align-items: center;
-  border-radius: 40px; 
+  border-radius: 40px;
   gap: 10px;
   padding: 0px 10px;
 }
-.destino, .origen, .passengersAmount{
-  width: 35%; 
-}
-.email img, .fechainit-fechaend img, .origen img, .destino img, .passengersAmount img, .coupon img { 
-  height: 60%;
-}
-.fechainit-fechaend div{
-  border:0px!important
+
+.destino {
+  width: 100%; /* Asegura que el contenedor ocupe el ancho completo disponible */
+  max-width: auto; /* O ajusta esto según el diseño deseado */
+  overflow: hidden; /* Esto asegurará que cualquier desbordamiento sea ocultado */
+  display: flex; /* Para alinear el contenido dentro del div */
+  align-items: center; /* Centra verticalmente el contenido */
 }
 
-select, input[type="date"], input[type="email"], input[type="tel"], input[type="text"] {
+.basic-multi-select {
+  width: 100%; /* Asegura que el select ocupe todo el ancho del contenedor */
+}
+
+.destino img {
+  flex-shrink: 0; /* Evita que la imagen se encoja */
+  margin-right: 10px; /* Espaciado entre la imagen y el select */
+}
+
+.basic-multi-select {
+  flex-grow: 1; /* Asegura que el select crezca para llenar el espacio disponible */
+}
+
+.destino img {
+  max-width: 24px; /* Ajusta el tamaño máximo del icono */
+  height: auto; /* Mantiene la proporción de la imagen */
+}
+
+
+.css-26l3qy-menu {
+  /* Clase CSS para el dropdown del react-select */
+  z-index: 1000; /* Asegura que el dropdown esté por encima de otros elementos */
+  position: absolute;
+}
+
+.css-26l3qy-menu {
+  /* Clase CSS para el menú desplegable del react-select */
+  width: 100%; /* Ajusta el ancho al 100% del contenedor */
+  max-width: 300px; /* O define un ancho máximo si lo prefieres */
+  border: 1px solid #ddd; /* Define un borde sutil */
+  border-radius: 4px; /* Aplica un borde redondeado */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Añade una sombra sutil */
+}
+
+.css-1hwfws3 {
+  /* Clase CSS para el contenedor del react-select */
+  min-height: 50px; /* Ajusta la altura mínima del select */
+  height: 100%; /* Asegura que ocupe todo el espacio disponible */
+  overflow-y: auto; /* Permite scroll en caso de que el contenido sea más alto que el contenedor */
+}
+
+.css-1u9des2-indicatorSeparator {
+  /* Clase CSS para el separador de indicadores */
+  display: none; /* Oculta el separador para ganar espacio */
+}
+
+.css-12jo7m5 {
+  /* Clase CSS para el ícono de dropdown */
+  margin-top: 0; /* Alinea el ícono al centro verticalmente */
+}
+
+.css-1rhbuit-multiValue {
+  /* Clase CSS para los valores seleccionados */
+  max-width: 100%; /* Asegura que los valores seleccionados no se salgan del contenedor */
+  overflow: hidden; /* Oculta cualquier texto que se desborde */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos si el texto es muy largo */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+.destino,
+.origen,
+.passengersAmount {
+  width: 35%;
+}
+.email img,
+.fechainit-fechaend img,
+.origen img,
+.destino img,
+.passengersAmount img,
+.coupon img {
+  height: 60%;
+}
+.fechainit-fechaend div {
+  border: 0px !important;
+}
+
+select,
+input[type="date"],
+input[type="email"],
+input[type="tel"],
+input[type="text"] {
   align-self: center;
   align-items: center;
   width: 100%;
@@ -257,53 +375,69 @@ select, input[type="date"], input[type="email"], input[type="tel"], input[type="
   border-radius: 10px;
   box-sizing: border-box;
 }
-.sec3-form{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
+.sec3-form {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding: 2% 5%;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
+/* input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
-}
+} */
 
-input[type=number] { -moz-appearance:textfield; }
+/* input[type=number] { -moz-appearance:textfield; } */
 
-.buttonhot{
+.buttonhot {
   align-self: center;
   align-items: center;
   width: 100%;
   padding: 10px;
   border-radius: 10px;
   box-sizing: border-box;
-  text-decoration: none!important;
+  text-decoration: none !important;
   cursor: pointer;
   color: black;
-
 }
 
-.tyc{
+.tyc {
   text-decoration: none;
-  color: #008DC7;
+  color: #008dc7;
+  font-weight: 600;
 }
 
-
-.modalPassenger{
+.modalPassenger {
   display: flex;
   flex-direction: column;
-  width: 25vw;
-  top: 22vh;
-  left: 3vw;
-  height:33vh;
+  width: 18vw;
+  top: 20vh;
+  left: 2vw;
+  height: 33vh;
   background: #fff;
   position: absolute;
   align-items: center;
+  box-shadow: 0px 4px 16px 0px #00000026;
+  border-radius: 20px;
 }
-.checkbox{
+
+.icon-trash {
+  height: auto;
+  width: auto;
+}
+
+.ageCard-sec1 {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  width: 50%;
+  justify-content: flex-end;
+}
+
+.checkbox {
   display: flex;
   align-items: center;
   height: 100%;
@@ -311,84 +445,90 @@ input[type=number] { -moz-appearance:textfield; }
   margin-right: 5px;
 }
 
+.checkbox p {
+  font-weight: 500;
+}
 
-.columna1{
-  background:#EEF0FF;
+.columna1 {
+  background: #f5f7f8;
   display: flex;
   flex-direction: row;
-  height:20%;
-  width: 95%;
+  height: 20%;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
   padding: 0px 10px;
-
+  color: #009c8c;
 }
 
-.columna2{
+.columna2 {
   flex-direction: column;
   display: flex;
-  height:60%;
-  width: 95%;
+  height: 60%;
+  width: 100%;
   align-items: flex-start;
   overflow-y: auto;
-  padding: 0px 10px;
-  gap:10px;
-  
+  padding: 0px 0px;
+  gap: 10px;
+  color: #009c8c;
 }
-.ageCard{
+.ageCard {
   width: 100%;
   height: 25%;
   height: max-content;
-  padding: 10px 0px;
-  border-bottom: #a9a9a9 1px solid;
+  padding: 10px 10px;
+  border-bottom: #f3f3f3 1px solid;
   flex-direction: row;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.columna3{
-  height:20%;
+.ageCard span {
+  width: 50%;
+}
+
+.columna3 {
+  height: 20%;
   width: 95%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 0px 10px;
-
 }
-.react-international-phone-input-container button, .react-international-phone-input-container input{
-  background-color: transparent!important;
+.react-international-phone-input-container button,
+.react-international-phone-input-container input {
+  background-color: transparent !important;
 }
 
-.listo{
+.listo {
   display: flex;
   width: 30%;
-  height:60%;
+  height: 60%;
   padding: 5px;
   border: none;
   border-radius: 50px;
   color: white;
-  background: #008DC7;
+  background: #009c8c;
   cursor: pointer;
   text-align: center;
 }
 
-
 .submitButton {
   display: block;
-  width: 23.5%;
-  padding: 10px;
+  height: 48px;
+  width: 18%;
+  padding: 12px, 16px, 12px, 16px;
   border: none;
-  border-radius: 50px;
+  border-radius: 18px;
   color: white;
-  background: #2C1FBD;
+  background: #2c1fbd;
   cursor: pointer;
   background-position: center;
   transition: all 0.3s ease;
 }
 
-
-.content-Slider{
+.content-Slider {
   width: 85vw;
   height: 300px;
   margin-left: auto;
@@ -397,26 +537,27 @@ input[type=number] { -moz-appearance:textfield; }
 
 .card {
   height: 100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 
-.img_slider{
+.img_slider {
   width: 70%;
-  object-fit: contain; 
+  object-fit: contain;
   user-select: none;
 }
 
-.slider{
-  height:300px
+.slider {
+  height: 300px;
 }
 
-.slider ul, .slider li{
-  height:100%
+.slider ul,
+.slider li {
+  height: 100%;
 }
-.titulo{
+.titulo {
   user-select: none;
 }
 
@@ -425,19 +566,19 @@ input[type=number] { -moz-appearance:textfield; }
   height: 100vh;
   flex-direction: row;
   align-items: end;
-  background: linear-gradient(90deg, #5DBCA3 0%, #008DC7 100%);
+  background: linear-gradient(90deg, #5dbca3 0%, #008dc7 100%);
   border-radius: 50px;
   padding-bottom: 50px;
   padding-top: 50px;
 }
 
-.content-carousel{
+.content-carousel {
   width: 73vw;
   height: 75vh;
   margin-left: auto;
   margin-right: auto;
 }
-    
+
 .card-sec-2 {
   height: 100%;
   display: flex;
@@ -445,14 +586,14 @@ input[type=number] { -moz-appearance:textfield; }
   justify-content: center;
 }
 
- .sec-2-img-slider {
+.sec-2-img-slider {
   object-fit: cover;
   width: 100%;
   height: auto;
 }
 
-.container.slider{
-  height:100%;
+.container.slider {
+  height: 100%;
   border-radius: 50px;
 }
 
@@ -465,7 +606,7 @@ input[type=number] { -moz-appearance:textfield; }
   background-position: center;
 }
 
-.why-contain{
+.why-contain {
   height: 100%;
   width: 80%;
   margin: auto;
@@ -474,31 +615,29 @@ input[type=number] { -moz-appearance:textfield; }
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-
 }
 
 .img-why {
   border-radius: 30px;
 }
 
-.text-why{
+.text-why {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   padding-left: 10%;
 }
 
-.why-title{
-  font-family: 'Diavlo Black';
-  color: #5DBCA3;
+.why-title {
+  font-family: "Diavlo Black";
+  color: #5dbca3;
 }
 
-.why-text{
-  font-family: 'Montserrat';
+.why-text {
+  font-family: "Montserrat";
 }
 
-
-.planes-contain{
+.planes-contain {
   height: 100vh;
   text-align: center;
 }
@@ -520,20 +659,20 @@ input[type=number] { -moz-appearance:textfield; }
     margin-top: 100px;
 } */
 
-.img-card-logo{
+.img-card-logo {
   height: 50px;
 }
 
-.nosotros-info{
+.nosotros-info {
   width: 100%;
   height: auto;
-  background: linear-gradient(90deg, #5DBCA3 0%, #008DC7 100%);
+  background: linear-gradient(90deg, #5dbca3 0%, #008dc7 100%);
   border-radius: 20px 20px 0 0;
   margin-top: 5%;
   padding: 5% 0;
 }
 
-.nosotros-contain{
+.nosotros-contain {
   height: 100%;
   width: 80%;
   margin: auto;
@@ -541,35 +680,34 @@ input[type=number] { -moz-appearance:textfield; }
   justify-content: space-evenly;
   flex-direction: row;
   align-items: center;
-
 }
 
-.nosotros-text{
+.nosotros-text {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   padding-left: 10%;
 }
 
-.nosotros-title{
-  font-family: 'Diavlo Black';
+.nosotros-title {
+  font-family: "Diavlo Black";
   color: #fff;
 }
 
-.p-nosotros{
-  font-family: 'Montserrat';
+.p-nosotros {
+  font-family: "Montserrat";
   color: #fff;
 }
 
-.filosofia-info{
+.filosofia-info {
   width: 100%;
   height: auto;
-  background: linear-gradient(90deg, #5DBCA3 0%, #008DC7 100%);
+  background: linear-gradient(90deg, #5dbca3 0%, #008dc7 100%);
   border-radius: 20px 20px 0 0;
   margin-top: 5%;
 }
 
-.filosofia-contain{
+.filosofia-contain {
   height: auto;
   width: 100%;
   margin: auto;
@@ -579,7 +717,7 @@ input[type=number] { -moz-appearance:textfield; }
   align-items: center;
 }
 
-.filosofia-text{
+.filosofia-text {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -587,40 +725,40 @@ input[type=number] { -moz-appearance:textfield; }
   padding: 5% 10%;
 }
 
-.filosofia-title{
-  font-family: 'Diavlo Black';
+.filosofia-title {
+  font-family: "Diavlo Black";
   color: #fff;
 }
 
-.b-filosofia{
-  font-family: 'Montserrat';
-  color:#fff;
+.b-filosofia {
+  font-family: "Montserrat";
+  color: #fff;
 }
 
-.p-filosofia{
-  font-family: 'Montserrat';
-  color:#fff;
+.p-filosofia {
+  font-family: "Montserrat";
+  color: #fff;
 }
 
-.title-productos{
+.title-productos {
   width: 100%;
   height: auto;
-  background: linear-gradient(90deg, #5DBCA3 0%, #008DC7 100%);
+  background: linear-gradient(90deg, #5dbca3 0%, #008dc7 100%);
   margin-top: 5%;
 }
 
-.texto{
+.texto {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.title{
-  font-family: 'Montserrat';
-  color:#fff;
+.title {
+  font-family: "Montserrat";
+  color: #fff;
 }
 
-.productos-contain{
+.productos-contain {
   width: 100%;
   height: auto;
   display: flex;
@@ -629,7 +767,7 @@ input[type=number] { -moz-appearance:textfield; }
   padding: 5% 0;
 }
 
-.sec1-productos{
+.sec1-productos {
   width: 100%;
   height: auto;
   justify-content: center;
@@ -639,7 +777,7 @@ input[type=number] { -moz-appearance:textfield; }
   gap: 40px;
 }
 
-.sec2-productos{
+.sec2-productos {
   width: 100%;
   height: auto;
   justify-content: center;
@@ -649,12 +787,11 @@ input[type=number] { -moz-appearance:textfield; }
   gap: 40px;
 }
 
-.img-productos{
+.img-productos {
   width: 200px;
 }
 
 @media (orientation: portrait) {
-
   .form {
     width: 100%;
   }
@@ -663,8 +800,10 @@ input[type=number] { -moz-appearance:textfield; }
     width: 100%;
   }
 
-  .origen, .passengersAmount, .fechaIda , .fechaVuelta {
+  .origen,
+  .passengersAmount,
+  .fechaIda,
+  .fechaVuelta {
     width: 25%;
   }
-
 }

@@ -3,7 +3,6 @@ import logo from "./static/icon.png";
 import logo_iso from "./static/CS alternativo2 blanco.png";
 import login from "./static/login3.svg";
 import { useState, useEffect, useRef } from "react";
-import "./navb.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./terms.css";
 import Footer from "./components/Footer";
@@ -18,6 +17,11 @@ import Navbar from "./components/Navbar.js";
 import TriggerRendererProp from "./components/overlay.js";
 import Acordeon from "./components/Acordeon.js";
 import MediaQuery from "react-responsive";
+import Accordion from "react-bootstrap/Accordion";
+import Flicking from "@egjs/react-flicking";
+import "@egjs/react-flicking/dist/flicking.css";
+import Rating from './components/Rating';
+
 
 const options = [
   { value: "highPrice", label: "Precio: mayor a menor" },
@@ -134,7 +138,13 @@ function Planes() {
   };
 
   return (
-    <div className="home" id="planes">
+    <div className="home" id="planesC">
+      <Navbar
+          section={4}
+          notSticky={true}
+          menuVisible={menuVisible}
+          setMenuVisible={setMenuVisible}
+        ></Navbar>
       <MediaQuery orientation={"landscape"}>
         {/* <Navbar menuVisible={menuVisible} setMenuVisible={setMenuVisible}></Navbar> */}
       </MediaQuery>
@@ -265,20 +275,15 @@ function Planes() {
                   />
                 </div>
                 <div className="precios-input">
-                  <input
-                    type="number"
-                    className="precio-minimo"
-                    value={precioMinimo}
-                    placeholder="Min."
-                    onChange={(e) => setPrecioMinimo(e.target.value)}
-                  />
-                  <input
-                    type="number"
-                    className="precio-maximo"
-                    value={precioMaximo}
-                    placeholder="Max."
-                    onChange={(e) => setPrecioMaximo(e.target.value)}
-                  />
+                  <div className="priceBoxes">
+                    <span className="kindText">Minimo</span>
+                    <input type="number" className="precio-minimo" value={precioMinimo} placeholder="Min." onChange={(e) => setPrecioMinimo(e.target.value)}/> 
+                  </div>
+                  <div className="priceBoxes">
+                    <span className="kindText">Maximo</span>
+                    <input type="number" className="precio-maximo" value={precioMaximo} placeholder="Max." onChange={(e) => setPrecioMaximo(e.target.value)}/>
+                  </div>
+
                 </div>
               </div>
               <div className="coberturas-filtro">
@@ -288,7 +293,7 @@ function Planes() {
                     flexDirection: "column",
                     justifyContent: "center",
                     display: "flex",
-                    gap: 50,
+                    gap: 25,
                     paddingTop: 20,
                     paddingBottom: 20,
                     paddingLeft: 10,
@@ -327,7 +332,7 @@ function Planes() {
                     flexDirection: "column",
                     justifyContent: "center",
                     display: "flex",
-                    gap: 50,
+                    gap: 25,
                     paddingTop: 20,
                     paddingBottom: 20,
                     paddingLeft: 10,
@@ -363,10 +368,11 @@ function Planes() {
             <div className="comparar-section">
               <div className="box- comparar">
                 <Modal isOpen={isOpenModal} closeModal={closeModal}>
+                
                   {planSelected.length >= 2 && (
                     <>
                       <div className="coberturas-botones">
-                        {categorias.map((zz, i) => {
+                      {categorias.map((zz, i) => {
                           return (
                             <a
                               className="boton-cobertura"
@@ -388,7 +394,7 @@ function Planes() {
                               }
                             >
                               {" "}
-                              {zz.nombre}
+                              {zz.nombre} asdasdasdasdasdasdasda 
                             </a>
                           );
                         })}
@@ -445,7 +451,7 @@ function Planes() {
                       })}
                     </>
                   )}
-                </Modal>
+                </Modal> 
               </div>
             </div>
           </div>
@@ -478,6 +484,10 @@ function Planes() {
                               src={require("./static/CS color.png")}
                               className="img-card-logo"
                             />
+                            <div className='latest-release'>
+                              <p>Vendido por ultima vez</p>
+                              <p>Hace 3 horas.</p>
+                            </div>
                             {x.plan.recomendado === 1 && (
                               <div className="puntuacion">
                                 <p>{x.plan.razonrecomendado}</p>
@@ -488,14 +498,13 @@ function Planes() {
                                 />
                               </div>
                             )}
+                            <div>
+                              <Rating rating={4.24} numReviews={1684} />
+                            </div>
                           </div>
                           <div className="card-plan-info">
                             <p
-                              style={{
-                                fontSize: 20,
-                                color: "black",
-                                margin: 0,
-                              }}
+                              className="titleCard"
                             >
                               <strong>{x.plan.nombre}</strong>
                             </p>
@@ -543,10 +552,18 @@ function Planes() {
                               isOpen={isOpenModal1}
                               closeModal={closeBeneficios}
                               header={planSelection}
+                              navBar={true}
                             >
                               {"plan" in planSelection && (
                                 <div className="modalBody">
                                   <div className="coberturas-botones">
+                                  <Flicking
+                                      align="prev"
+                                      circular={true}
+                                      className="flicker"
+                                      onMoveEnd={e => {
+                                        console.log(e);
+                                      }}>
                                     {categorias.map((zz, i) => {
                                       return (
                                         <a
@@ -573,6 +590,8 @@ function Planes() {
                                         </a>
                                       );
                                     })}
+                                  </Flicking>
+
                                   </div>
 
                                   {allCoberturas.map((xz) => {
@@ -604,6 +623,8 @@ function Planes() {
                                   })}
                                 </div>
                               )}
+                              
+                                
                             </Modal>
 
                             <a
@@ -623,6 +644,7 @@ function Planes() {
                             <Modal
                               isOpen={isOpenModal2}
                               closeModal={closeLoque}
+                              
                               headerText={"Lo que debes saber"}
                             >
                               {"plan" in planSelection && (
@@ -640,12 +662,13 @@ function Planes() {
                           <div className="precio-plan">
                             <strong>USD {x.tarifa.tarifaventa}</strong>
                             <a href="#" className="seleccionar">
-                              Seleccionar
+                              Contratar
                             </a>
                             <div className="comparar-check">
                               <input
                                 type="checkbox"
                                 className="comparar-plan"
+                                name="one"
                                 checked={
                                   planSelected.includes(i) ? true : false
                                 }
@@ -659,7 +682,7 @@ function Planes() {
                                   }
                                 }}
                               />
-                              <p>Comparar</p>
+                              <label for="one">Comparar</label>
                             </div>
                           </div>
                         </div>
@@ -669,12 +692,13 @@ function Planes() {
               })}
           </div>
         </div>
-        <div className="comparar-acordeon">
-          <Acordeon
-            planSelected={planSelected}
-            setPlanSelected={setPlanSelected}
-          ></Acordeon>
-        </div>
+          <div className="comparar-acordeon">
+            <Acordeon
+              planSelected={planSelected}
+              setPlanSelected={setPlanSelected}
+            ></Acordeon>
+          </div>
+        
       </MediaQuery>
 
       <MediaQuery orientation={"portrait"}>
@@ -758,6 +782,167 @@ function Planes() {
                               />
                               <p>Comparar</p>
                             </div>
+                          </div>
+                          <div className="info-plan">
+                            <Accordion defaultActiveKey="0">
+                              <Accordion.Item eventKey="1">
+                                <Accordion.Header>
+                                  Ver Beneficios del Plan
+                                </Accordion.Header>
+                                <Accordion.Body>
+                                  <div className="coberturas-info">
+                                    {x.coberturas.map((y) => {
+                                      return (
+                                        <>
+                                          {y.coberturaDetailed[0].destacada ===
+                                          1 ? (
+                                            <div className="contentFocusCover">
+                                              <img
+                                                src={require("./static/Cobertura Check.png")}
+                                                alt="cobertura status"
+                                                className="cobertura-check"
+                                              />
+                                              <p
+                                                style={{
+                                                  fontSize: 10,
+                                                  margin: 0,
+                                                }}
+                                              >
+                                                {y.coberturaDetailed[0].nombre}
+                                              </p>
+                                              <p
+                                                style={{
+                                                  fontSize: 10,
+                                                  margin: 0,
+                                                }}
+                                              >
+                                                <strong>{y.alcance}</strong>
+                                              </p>
+                                              {TriggerRendererProp(
+                                                y.coberturaDetailed[0]
+                                                  .informacion
+                                              )}
+                                            </div>
+                                          ) : (
+                                            <></>
+                                          )}
+                                        </>
+                                      );
+                                    })}
+                                  </div>
+                                  <div className="botones-info-plan">
+                                    <a
+                                      className="ver-mas-beneficios"
+                                      onClick={() => {
+                                        openBeneficios();
+                                        setPlanSelection(x);
+                                      }}
+                                    >
+                                      <img
+                                        src={require("./static/Plus.png")}
+                                        alt="ver mas info"
+                                        className="plus-img"
+                                      />
+                                      Ver más beneficios
+                                    </a>
+                                    <Modal
+                                      isOpen={isOpenModal1}
+                                      closeModal={closeBeneficios}
+                                      header={planSelection}
+                                      isMobile={true}
+                                    >
+                                      {"plan" in planSelection && (
+                                        <div className="modalBody">
+                                          <div className="coberturas-botones mobile">
+                                          <Flicking
+                                            align="prev"
+                                            circular={false}
+                                            className="flicker"
+                                            onMoveEnd={e => {
+                                              console.log(e);
+                                            }}>
+                                            {categorias.map((zz, i) => {
+                                              return (
+                                                <a
+                                                  className="boton-cobertura"
+                                                  onClick={() => {
+                                                    setActualCategory(zz.id);
+                                                  }}
+                                                  style={
+                                                    actualCategory === zz.id
+                                                      ? {
+                                                          background: "#008DC7",
+                                                          color: "white",
+                                                          transition:
+                                                            "all 0.3s linear",
+                                                        }
+                                                      : {
+                                                          background: "#F5F7F8",
+                                                          color: "#959999",
+                                                          transition:
+                                                            "all 0.2s linear",
+                                                        }
+                                                  }
+                                                >
+                                                  {" "}
+                                                  {zz.nombre}
+                                                </a>
+                                              );
+                                            })}
+                                            </Flicking>
+                                          </div>
+
+                                          {allCoberturas.map((xz) => {
+                                            const matchingItem =
+                                              planSelection.coberturas.find(
+                                                (yy) =>
+                                                  yy.coberturaDetailed[0].id ===
+                                                  xz.id
+                                              );
+                                            return (
+                                              <>
+                                                {xz.categoria_id ===
+                                                  actualCategory && (
+                                                  <>
+                                                    <div className="coberturas-comparar2">
+                                                      <h2 className="mobileTexting">{xz.nombre}</h2>
+                                                      {matchingItem ? (
+                                                        <p className="included mobile">
+                                                          {matchingItem.alcance}
+                                                        </p>
+                                                      ) : (
+                                                        <p className="notIncluded mobile">
+                                                          No incluida
+                                                        </p>
+                                                      )}
+                                                    </div>
+                                                  </>
+                                                )}
+                                              </>
+                                            );
+                                          })}
+                                        </div>
+                                      )}
+                                    </Modal>
+                                    <a
+                                      className="lo-que-debes-saber"
+                                      onClick={openLoque}
+                                    >
+                                      <img
+                                        src={require("./static/Alert.png")}
+                                        alt="Lo que debes saber"
+                                        className="lo-que-img"
+                                      />
+                                      Lo que debes saber
+                                    </a>
+                                    <Modal
+                                      isOpen={isOpenModal2}
+                                      closeModal={closeLoque}
+                                    ></Modal>
+                                  </div>
+                                </Accordion.Body>
+                              </Accordion.Item>
+                            </Accordion>
                           </div>
 
                           <div className="card-plan-info">
@@ -862,7 +1047,7 @@ function Planes() {
                                           }
                                         >
                                           {" "}
-                                          {zz.nombre}
+                                          {zz.nombre} asdasdasdasdasd
                                         </a>
                                       );
                                     })}
@@ -922,12 +1107,14 @@ function Planes() {
               })}
           </div>
         </div>
-        <div className="comparar-acordeon">
-          <Acordeon
-            planSelected={planSelected}
-            setPlanSelected={setPlanSelected}
-          ></Acordeon>
-        </div>
+        {planSelected.length >=1 &&(
+          <div className="comparar-acordeon">
+            <Acordeon
+              planSelected={planSelected}
+              setPlanSelected={setPlanSelected}
+            ></Acordeon>
+          </div>
+        )}
       </MediaQuery>
 
       {/* <Footer /> */}

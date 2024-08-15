@@ -1,0 +1,40 @@
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .carousel-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 10px;
+  }
+  
+  .carousel-images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    position: relative;
+  }
+  
+  .carousel-image {
+    opacity: 0.5;
+    transition: transform 0.5s, opacity 0.5s;
+  }
+  
+  .carousel-image.active {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  
+  .carousel-image.adjacent {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  
+  .carousel-image:not(.active):not(.adjacent) {
+    display: none;
+  }

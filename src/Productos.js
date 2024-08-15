@@ -3,7 +3,6 @@ import logo from "./static/icon.png"
 import logo_iso from "./static/CS alternativo2 blanco.png"
 import login from "./static/login3.svg"
 import {useState, useEffect,useRef} from 'react'
-import "./navb.css";
 import "./terms.css"
 import { useLocation, useNavigate } from 'react-router-dom';
 import Footer from './components/Footer';

@@ -1,44 +1,195 @@
-import {useState, useEffect,useRef} from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
-import "../navb.css"
-import logo from "../static/CS blanco.png"
+import "../styles/Footer.css";
+import logo from "../static/CS blanco.png";
+import facebook from "../static/facebook.svg";
+import insta from "../static/instagram.svg";
+import phone from "../static/telefono.svg";
+import ws from "../static/whatsapp.svg";
+import oferta from "../static/Oferta.svg";
+import MediaQuery from "react-responsive";
+import Accordion from "react-bootstrap/Accordion";
 
 function Footer() {
-// h
-
   return (
-    <div className='footer'>
-        {/* <div className='LogoSocial'>
-            <img className='footerLogo' src={logo} draggable={false} />
-            <div className='contentIcon'>
-                <a className='iconSocial' href='https://www.instagram.com/comparaseguro_?igsh=MXV5aDNraDNzOXVkZg=='><img src={require('../static/instagram.png')} draggable={false}/></a>
-                <a className='iconSocial'><img src={require('../static/facebook.png')} draggable={false}/></a>
-                <a className='iconSocial'><img src={require('../static/whatsapp.png')} draggable={false}/></a>
-                <a className='iconSocial'><img src={require('../static/x.png')} draggable={false}/></a>
-
+    <div className="footer">
+      <MediaQuery orientation={"landscape"}>
+        <div className="curva-footer"></div>
+        <div className="footer-contenedor">
+          <div className="sec-1-footer">
+            <div className="logo-cos-redes">
+              <a href="/">
+                <img
+                  src={logo}
+                  className="logo-compara"
+                />
+              </a>
+              <div className="botones-redes">
+                <a href="https://www.facebook.com/Compara.Seguro.Viajes" target="_blank">
+                  <img src={facebook} className="facebook" alt="facebook" />
+                </a>
+                <a
+                  href="https://www.instagram.com/comparaseguro_viajes"
+                  target="_blank"
+                >
+                  <img src={insta} className="insta" alt="insta" />
+                </a>
+              </div>
             </div>
+
+            <div className="sec-cos1">
+              <div className="btn-sec1">
+                <p id="company-btn">
+                  Compañía
+                </p>
+                <a href="#">Conócenos</a>
+                <a href="#">Forma parte</a>
+                <a href="#">Contáctanos</a>
+                <a href="#">Asistencia Médica</a>
+              </div>
+              <div className="asesoria-btn">
+                <a href="#">Asesoría en compra</a>
+              </div>
+            </div>
+
+            <div className="sec-cos3">
+              <div className="btn-sec2">
+                <a href="https://blog.compara-seguro.com/" target="_blank"  id="company-btn">
+                  Blog
+                </a>
+                <a href="#">Consejos para viajar en avión</a>
+                <a href="#">
+                  Viaja Seguro con
+                  <br />
+                  Enfermedades Preexistentes
+                </a>
+              </div>
+            </div>
+
+            <div className="sec-cos2">
+              <div className="btn-sec2">
+                <a href="#" id="company-btn">
+                  Atención al Cliente
+                </a>
+                <a href="#">
+                  <img src={phone} className="phone" alt="phone" />
+                  +57 1111-11111
+                </a>
+                <a href="#">
+                  <img src={ws} className="ws" alt="whatsapp" />
+                  +57 1111-11111
+                </a>
+                <p>Lunes a viernes de 8:00 a<br/>16:00hs</p>
+                <p>Sábados, domingos y<br/>feriados de 9:00 a 15:0hs</p>
+              </div>
+            </div>
+
+            <div className="sec-cos2">
+              <div className="btn-sec2">
+                <div className="ofertas-gmail">
+                  <img src={oferta} className="oferta" alt="ofertas" />
+                  <p>
+                    Ofertas exclusivas en
+                    <br />
+                    tu email
+                  </p>
+                </div>
+                <div className="oferta-input">
+                  <input
+                    placeholder="Ingresa tu email"
+                    type="text"
+                    style={{ color: "#009C8C", textAlign: "center" }}
+                  />
+                </div>
+                <button type="submit" className="suscribirme">
+                  Suscribirme
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="sec-2-footer">
+            <div className="sec2-cos">
+              <p>Compara Seguro 2024. Todos los derechos</p>
+            </div>
+            <div className="sec2-cos2">
+              <a href="#">Políticas de Privacidad</a>
+              <a href="/terms">Términos y Condiciones</a>
+            </div>
+          </div>
         </div>
-        <div className='ColumnCard'>
-            <a className='footerLink'href='/'>• Inicio</a>
-            <a className='footerLink' href='/nosotros'>• Nosotros</a>
-            <a className='footerLink'>• Aliados</a>
-            <a className='footerLink' href='/'>• Asistencia Médica</a>
-            <a className='footerLink'>• Viaja Seguro</a>
+      </MediaQuery>
+
+      <MediaQuery orientation={"portrait"}>
+        <div className="items-footer">
+          <div className="logo-cos-redes">
+            <a href="/">
+              <img
+                src={require("../static/CS alternativo2 blanco.png")}
+                className="logo-compara"
+              />
+            </a>
+            <div className="botones-redes">
+              <a href="#">
+                <img src={facebook} className="facebook" alt="facebook" />
+              </a>
+              <a href="https://www.instagram.com/comparaseguro_/">
+                <img src={insta} className="insta" alt="insta" />
+              </a>
+            </div>
+          </div>
+          <div className="secc-mobile-footer">
+            <Accordion defaultActiveKey="0">
+              <Accordion.Item eventKey="1">
+                <Accordion.Header>Compañía</Accordion.Header>
+                <Accordion.Body>
+                  <a href="/nosotros">Conócenos</a>
+                  <a href="#">Forma parte</a>
+                  <a href="#">Contáctanos</a>
+                  <a href="#">Asistencia Médica</a>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </div>
+          <div className="secc-mobile-footer">
+            <Accordion defaultActiveKey="0">
+              <Accordion.Item eventKey="1">
+                <Accordion.Header>Blog</Accordion.Header>
+                <Accordion.Body>
+                <a href="https://blog.compara-seguro.com/" target="_blank"  id="company-btn">
+                  Blog
+                </a>
+                  <a href="#">Consejos para viajar en avión</a>
+                  <a href="#">Viaja Seguro con Enfermedades Preexistentes</a>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </div>
+          <div className="secc-mobile-footer">
+            <Accordion defaultActiveKey="0">
+              <Accordion.Item eventKey="1">
+                <Accordion.Header>Atención al Cliente</Accordion.Header>
+                <Accordion.Body>
+                  <a href="#">Página 1</a>
+                  <a href="#">Página 2</a>
+                  <a href="#">Página 3</a>
+                  <a href="#">Página 4</a>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+          </div>
+          <div className="asesoria-btn">
+            <a href="#">Asesoría en compra</a>
+          </div>
         </div>
-        <div className='ColumnCard'>
-            <a className='footerLink'>• Blog</a>
-            <a className='footerLink' href='/productos'>• Productos</a>
-            <a className='footerLink'>• Seguros de viaje</a>
-            <a className='footerLink'>• Cobertura de viaje</a>
-            <a className='footerLink'>• Para empresas</a>
+        <div className="sec-2-footer">
+          <div className="sec2-cos2">
+            <a href="#">Políticas de Privacidad</a>
+            <a href="/terms">Términos y Condiciones</a>
+          </div>
+          <div className="sec2-cos">
+            <p>Compara Seguro 2024. Todos los derechos</p>
+          </div>
         </div>
-        <div className='ColumnCard'>
-            <a className='footerLink' href='/#cotizar'>• Cotizar</a>
-            <a className='footerLink'>• ¿Tienes una emergencia?</a>
-            <a className='footerLink'>• Contacto</a>
-            <a className='footerLink' href='/terms'>• Términos y condiciones</a>
-            <a className='footerLink'>• Política de privacidad</a>
-        </div> */}
+      </MediaQuery>
     </div>
   );
 }

@@ -1,13 +1,15 @@
 import React from 'react'
 import "./Modal.css"
-
-const Modal = ({ children, isOpen, closeModal, header, headerText }) => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+const Modal = ({ children, isOpen, closeModal, header, headerText, turnAround, setTurnAround,isMobile, navBar  }) => {
   const handleModalContainerClick = e => e.stopPropagation()
   return (
-    <article className={`modal ${isOpen && "is-open"}`} onClick={closeModal}>
+    <article className={`modal ${isOpen && "is-open"} ${isMobile && "isMobile"}`} onClick={closeModal}>
       <div className='modal-container' onClick={handleModalContainerClick}>
         
         <div className='boton-container'>
+          
           {header !==undefined &&(
             <>
               {'plan' in header &&(<>
@@ -31,7 +33,32 @@ const Modal = ({ children, isOpen, closeModal, header, headerText }) => {
           
         <a className='modal-close' onClick={closeModal}><img src={require('./static/icon-x.png')} alt='close-modal'/></a>
         </div>
-        {children}
+        <div className="comparationContainer">
+          {children}
+          {navBar !== undefined &&(
+
+          <div className="cotizacion-form">
+            <div className="footerBanner">
+              <h2>¡Recibe esta cotización en tu email!</h2>
+            </div>
+            <form>
+              <div className="email-input">
+                <FontAwesomeIcon icon={faEnvelope} className="email-icon" />
+                <input
+                  type="email" 
+                  placeholder="email@email.com"
+                />
+              </div>
+              <div className="Enviar">
+                <img src={require('./static/backArrow.png')} className="backArrow" />
+                <span>Enviar ahora</span>
+              </div>
+            </form>
+          </div>
+        
+          )}
+        </div>
+        
       </div>
     </article>
   )

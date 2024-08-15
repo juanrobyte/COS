@@ -1,5 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/* Define la fuente Montserrat con una fuente variable. */
+@font-face {
+    font-family: "Montserrat";
+    src: local("Montserrat"),
+         url(../static/Fonts/Montserrat-VariableFont_wght.ttf) format("truetype");
+}
 
+/* Resetea los márgenes y rellenos de todos los elementos y establece la fuente global. */
 * {
     margin: 0;
     padding: 0;
@@ -7,171 +13,175 @@
     font-family: "Montserrat", sans-serif;
 }
 
-/* body {
-    height: 100vh;
-    background-image: url('../static/fondo-home.png');
-    background-size: cover;
-    background-position: center;
-} */
-
-li {
-    list-style: none !important;
+/* Estilos para el contenedor de la cabecera (header). */
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    position: fixed;
+    top: 0; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    height: 120px; 
+    padding: 10px 20px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, padding 0.3s ease, height 0.3s ease, top 0.3s ease;
+    z-index: 1000;
+    border-radius: 0px 0 30px 30px;
 }
 
+
+/* Estilos aplicados cuando la cabecera está desplazada (scrolled). */
+.header.scrolled {
+    background-color: #ffffff; 
+    padding: 5px 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    height: 60px; 
+    top: 0px;
+    border-radius: 0px;
+}
+.notSticky{
+    position: absolute!important
+}
+
+/* Estilos para el contenedor del logo. */
+.logo-seguro-de-viaje {
+    display: flex;
+    width: 20%;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos para los elementos de navegación. */
+.nav-items-seguro-de-viaje {
+    display: flex;
+    flex-direction: row;
+    width: 45%;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Estilos para el contenedor de inicio de sesión. */
+.login {
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Estilos para los enlaces en el contenedor de inicio de sesión. */
 .login a {
-    text-decoration: none !important;
-    font-size: 1rem !important;
-    color: #fff ;
+    text-decoration: none;
+    color: #fff;
 }
-.dropdown-menu-navb a {
+
+/* Estilo para los enlaces de inicio de sesión al pasar el cursor por encima. */
+.login a:hover {
+    color: #000;
+}
+
+.login a:focus {
     color: #fff;
     text-decoration: none;
 }
 
-.login a:hover {
-    color: #000 !important;
+/* Estilos para el contenedor del botón de menú. */
+.toggle-btn-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 30%;
 }
 
-.header {
-    display: flex !important;
-    flex-direction: row !important;
-    position: relative !important;
-
+/* Estilos para los botones en el contenedor del menú. */
+.btns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50%;
+    justify-content: space-evenly;
+    background-color: #fff;
+    height: 55px;
+    border-radius: 50px;
 }
 
-.logo{
-    width: auto !important;
-    height: auto !important;
-    margin-top: 2% !important;
-    margin-left: 5% !important;
-    align-items: center !important;
-}
-
-.navbar {
-    width: 80% !important;
-    height: auto !important;
-    max-width: 80% !important;
-    margin: 2% auto !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content:flex-end !important;
-    justify-items: flex-end !important;
-    gap: 1.5rem;
-}
-
-.links {
-    display: flex !important;
-    gap: 2rem !important;
-    display: none !important;
-}
-
-.links li:hover {
-    scale: 1.2 !important;
-}
-
+/* Estilo para el logo principal. */
 .logo-compara {
-    height: 50px !important;
+    height: 50px;
 }
 
+/* Estilo para el icono de inicio de sesión. */
 .login-compara {
-    height: 30px !important;
+    height: 30px;
 }
 
-.toggle-btn{
-    display: flex !important;
-    gap: 1.5rem !important;
+/* Estilo para el botón de menú en el contenedor de botones. */
+.bars-solid-compara {
+    cursor: pointer;
+    height: 35px;
 }
 
-.bars-solid {
-    cursor: pointer !important;
-    height: 50px !important;
+/* Estilo para el botón de cerrar en el contenedor de botones (si se utiliza). */
+.close-solid-compara {
+    cursor: pointer;
+    height: 50px;
 }
 
-.close-solid {
-    cursor: pointer !important;
-    height: 50px !important;
+/* Estilo para el logo pequeño. */
+.logo-peq {
+    height: 35px;
 }
 
-.login {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 1rem !important;
-}
-
-.logo-peq{
-    height: 50px !important;
-}
-
-/* DROPDOWN MENU */
-
-.dropdown-menu-navb{
-    display: none !important;
-    position: absolute !important;
-    /* right: 4rem; */
-    top: 100% !important;
-    height: 0 !important;
-    width: 100% !important;
-    background: linear-gradient(90deg, #5DBCA3 0%, #008DC7 100%) !important;
-    overflow: hidden !important;
-    transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-}
-
-.dropdown-menu li{
-    padding: 0.7rem !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-.dropdown-menu.open{
-    display: block !important;
-    height: auto !important;
-    z-index: 3 !important;
-}
-
-
-
-/* RESPONSIVE */
+/* Estilos responsivos para dispositivos en orientación vertical (portrait). */
 @media (orientation: portrait) {
-
-    .navbar{
-        width: 35% !important;
+    .header {
+        width: 100%;
+        height: 80px;
+        padding: 0 20px;
+        background-color: #ffffff; 
+        top: 0;
+        left: 0;
+        transform: none;
+        border-radius: 0;
     }
 
-    .links, .login {
-        display: none !important;
-    }
-
-    .bars-solid {
-        display: block !important;
-        height: 30px !important;
-    }
-
-    .login-compara {
-        height: 25px !important;
+    .logo-seguro-de-viaje {
+        width: auto;
     }
 
     .logo-compara {
-        height: 50px !important;
+        height: 35px;
     }
 
-    .logo-peq{
-        height: 35px !important;
+    .nav-items-seguro-de-viaje {
+        display: flex;
     }
 
-    .toggle-btn{
-        align-items: center !important;
-        gap: 0.9rem !important;
-    }
-    
-    .dropdown-menu{
-        display: block !important;
-
+    .login {
+        display: none;
     }
 
-    .dropdown-menu.open{
-        display: block !important;
-        height: auto !important;
-        z-index: 3 !important;
+    .toggle-btn-nav {
+        justify-content: flex-end;
+        width: auto;
+    }
+
+    .btns {
+        width: 85px;
+        height: 50px;
+        padding: 0 10px;
+    }
+
+    .bars-solid-compara {
+        height: 25px;
+    }
+
+    .logo-peq {
+        height: 25px;
     }
 }

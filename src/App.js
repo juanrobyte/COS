@@ -4,7 +4,6 @@ import logo_iso from "./static/CS alternativo2 blanco.png"
 import login from "./static/login3.svg"
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
-import "./navb.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useParallax } from 'react-scroll-parallax';
