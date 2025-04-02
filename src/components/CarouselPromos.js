@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -6,38 +6,63 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "../styles/MyCarousel.css";
 import promo1 from "../static/piezas/PIEZAS GRAFICAS WEB - COMPARASEGURO-02.png";
 import promo2 from "../static/piezas/PIEZAS GRAFICAS WEB - COMPARASEGURO-03.png";
-
-
+import promo1Mobile from "../static/piezas/PIEZAS-GRAFICAS-MOBILE-02.png";
+import promo2Mobile from "../static/piezas/PIEZAS-GRAFICAS-MOBILE-03.png";
+import promo1Tablet from "../static/piezas/PIEZAS-GRAFICAS-TABLET-02.png";
+import promo2Tablet from "../static/piezas/PIEZAS-GRAFICAS-TABLET-03.png";
 
 const MyCarousel = () => {
+  const [screenType, setScreenType] = useState("desktop"); // mobile, tablet, desktop
+
   const settings = {
-    dots: false, // Mostrar puntos de navegación
-    infinite: true, // Loop infinito
-    speed: 500, // Velocidad de la transición
-    slidesToShow: 2, // Mostrar 2 slides por defecto
-    slidesToScroll: 1, // Desplazar un slide a la vez
-    autoplay: true, // Habilitar autoplay
-    autoplaySpeed: 3000, // 3 segundos entre transiciones
-    pauseOnHover: false, // No pausar al hacer hover
-    nextArrow: <SampleNextArrow />, // Flecha personalizada para siguiente
-    prevArrow: <SamplePrevArrow />, // Flecha personalizada para anterior
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: false,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
     responsive: [
       {
-        breakpoint: 768, // Pantallas con ancho menor o igual a 768px (móvil)
+        breakpoint: 768,
         settings: {
-          slidesToShow: 1, // Mostrar 1 slide en modo portrait/móvil
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 1024, // Pantallas con ancho menor o igual a 1024px (tablets y portrait en landscape)
+        breakpoint: 1024,
         settings: {
-          slidesToShow: 2, // Mostrar 2 slides en modo landscape
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
     ],
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+
+      if (window.innerWidth <= 768 && isPortrait) {
+        setScreenType("mobile");
+      } else if (window.innerWidth > 768 && window.innerWidth <= 1024 && isPortrait) {
+        setScreenType("tablet");
+      } else {
+        setScreenType("desktop");
+      }
+    };
+
+    handleResize(); // Set initial state
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     window.dispatchEvent(new Event('resize')); // Fuerza un recalculo del layout
@@ -51,16 +76,28 @@ const MyCarousel = () => {
 
   return (
     <Slider {...settings}>
-      <div className="carousel-item" style={{ backgroundColor: '#000', height: '300px' }}>
-      <img
-          src={promo1}
+      <div className="carousel-item">
+        <img
+          src={
+            screenType === "mobile" 
+              ? promo1Mobile 
+              : screenType === "tablet" 
+              ? promo1Tablet 
+              : promo1
+          }
           alt="Vacaciones de Invierno"
           className="carousel-image"
         />
       </div>
-      <div className="carousel-item" style={{ backgroundColor: '#000', height: '300px' }}>
-      <img
-          src={promo2}
+      <div className="carousel-item">
+        <img
+          src={
+            screenType === "mobile" 
+              ? promo2Mobile 
+              : screenType === "tablet" 
+              ? promo2Tablet 
+              : promo2
+          }
           alt="Fiestas Patrias"
           className="carousel-image"
         />
@@ -78,14 +115,19 @@ const SampleNextArrow = (props) => {
       className={className}
       style={{
         ...style,
-        display: "block",
-        color: "#CDCDCD", // Color predeterminado de las flechas
-        fontSize: "30px",
-        transition: "color 0.3s ease", // Transición suave al cambiar el color
+        display: "block !important",
+        color: "#CDCDCD !important",
+        fontSize: "30px !important!",
+        transition: "color 0.3s ease !important",
+        margin: "0 !important",
+        padding: "0 !important",
+        width: "30px !important",
+        height: "30px !important",
+        boxShadow: "none !important"
       }}
       onClick={onClick}
-      onMouseEnter={(e) => (e.currentTarget.style.color = "#000000")} // Cambia a negro en hover
-      onMouseLeave={(e) => (e.currentTarget.style.color = "#CDCDCD")} // Vuelve al color predeterminado al salir del hover
+      onMouseEnter={(e) => (e.currentTarget.style.color = "#000000")}
+      onMouseLeave={(e) => (e.currentTarget.style.color = "#CDCDCD")}
     />
   );
 };
@@ -98,14 +140,17 @@ const SamplePrevArrow = (props) => {
       className={className}
       style={{
         ...style,
-        display: "block",
-        color: "#CDCDCD", // Color predeterminado de las flechas
-        fontSize: "30px",
-        transition: "color 0.3s ease", // Transición suave al cambiar el color
+        display: "block !important",
+        color: "#CDCDCD !important" ,
+        fontSize: "30px !important",
+        transition: "color 0.3s ease !important",
+        width: "30px !important",
+        height: "30px !important",
+        boxShadow: "none !important"
       }}
       onClick={onClick}
-      onMouseEnter={(e) => (e.currentTarget.style.color = "#000000")} // Cambia a negro en hover
-      onMouseLeave={(e) => (e.currentTarget.style.color = "#CDCDCD")} // Vuelve al color predeterminado al salir del hover
+      onMouseEnter={(e) => (e.currentTarget.style.color = "#000000")}
+      onMouseLeave={(e) => (e.currentTarget.style.color = "#CDCDCD")}
     />
   );
 };

@@ -18,8 +18,9 @@ import TriggerRendererProp from "./components/overlay.js";
 import Acordeon from "./components/Acordeon.js";
 import MediaQuery from "react-responsive";
 import Accordion from "react-bootstrap/Accordion";
-import Flicking from "@egjs/react-flicking";
-import "@egjs/react-flicking/dist/flicking.css";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import Rating from './components/Rating';
 
 
@@ -27,8 +28,8 @@ const options = [
   { value: "highPrice", label: "Precio: mayor a menor" },
   { value: "lowPrice", label: "Precio: menor a mayor" },
 ];
-
 function Planes() {
+  const [editarDatos, setEditarDatos] = useState(false)
   const [menuVisible, setMenuVisible] = useState(false);
   const [isOpenModal, openModal, closeModal] = useModal(false);
   const [isOpenModal1, openBeneficios, closeBeneficios] = useModal(false);
@@ -36,6 +37,29 @@ function Planes() {
   var cobertx = [];
   var providerx = [];
   var tarifax = [];
+  const prevArrow = (
+      <div className="arrowContainer">
+        <img className="imgSVG" src={require('./static/arrow-rightie.png')} />
+      </div>
+    )
+  const nextArrow = (
+    <div className="arrowContainer">
+        <img className="imgSVG" src={require('./static/arrow-leftie.png')} />
+    </div>
+  )
+  
+  const settings = {
+    dots: false,
+    slidesToScroll: 1,
+    className: " variable-width sliderex", 
+    slidesToShow: 1,
+    variableWidth: true,
+    infinite: true,
+    speed: 500,
+    cssEase: "linear",
+    nextArrow: prevArrow,
+    prevArrow: nextArrow,
+  };
   const [cobert, setCobert] = useState([]);
   const [provider, setProvider] = useState([]);
   const [tarifas, setTarifas] = useState([]);
@@ -45,6 +69,7 @@ function Planes() {
   const [categorias, setCategorias] = useState([]);
   const [destinos, setDestinos] = useState([]);
   const [securePlans, setSecurePlans] = useState([]);
+  const [planesTarifa, setPlanesTarifa] = useState([]);
   const [precioMinimo, setPrecioMinimo] = useState(0);
   const [precioMaximo, setPrecioMaximo] = useState([]);
   const [precioMaximoDefault, setPrecioMaximoDefault] = useState();
@@ -60,12 +85,12 @@ function Planes() {
   let navigate = useNavigate();
   const data = location.state;
   useEffect(() => {
-    console.log(data);
+    console.log("Contenido de data:", data);
     if (data === null) {
       console.log("null");
       navigate("/");
     } else {
-      console.log(data.data.viajeros.length);
+      console.log(data.data);
       setSecurePlans(data.data.securePlans);
       setFullData(data.data);
       setViajeros(data.data.viajeros);
@@ -76,16 +101,20 @@ function Planes() {
         var coberturas = data.data.securePlans[x].coberturas;
         var proveedor = data.data.securePlans[x].proveedor;
         var tarifa = data.data.securePlans[x].tarifa;
-        tarifax.push(tarifa.tarifaventa);
+        if (tarifa && tarifa.tarifaventa) {
+          tarifax.push(tarifa.tarifaventa);
+        }
+        console.log(coberturas)
         coberturas.forEach((element) => {
+          if ( element.coberturaDetailed[0] !== undefined){
           if (element.coberturaDetailed[0].filtro === 1) {
             if (cobertx.some((e) => e.id === element.coberturaDetailed[0].id)) {
             } else {
               cobertx.push(element.coberturaDetailed[0]);
             }
           }
+        }
         });
-
         if (providerx.some((e) => e.id === proveedor.id)) {
         } else {
           providerx.push(proveedor);
@@ -136,7 +165,10 @@ function Planes() {
       setSecurePlans(newOrder);
     }
   };
+  const preCheckout = (x, y) =>{
+    navigate("/viajeros", { state: { planInfo: x, viajeros: y, fullData: fullData, countryCode: data.countryCode } });
 
+  }
   return (
     <div className="home" id="planesC">
       <Navbar
@@ -201,13 +233,14 @@ function Planes() {
           </div>
           <div className="viajeros">
             <strong>{viajeros !== null && viajeros.length} viajeros</strong>
-            <a href="#" className="editar">
+            <a href="#" className="editar" onClick={setEditarDatos(true)}>
               <img
                 src={require("./static/Editar boton.png")}
                 alt="editar info pasajeros"
                 className="boton-editar"
               />
             </a>
+            
           </div>
         </div>
       </MediaQuery>
@@ -412,7 +445,9 @@ function Planes() {
                               <strong>
                                 {securePlans[xy].tarifa.tarifaventa}
                               </strong>
-                              <a className="boton-contratar">Contratar</a>
+                              <a onClick={()=>{preCheckout(x, viajeros)}}className="seleccionar">
+                              Contratar
+                            </a>
                             </div>
                           );
                         })}
@@ -557,13 +592,7 @@ function Planes() {
                               {"plan" in planSelection && (
                                 <div className="modalBody">
                                   <div className="coberturas-botones">
-                                  <Flicking
-                                      align="prev"
-                                      circular={true}
-                                      className="flicker"
-                                      onMoveEnd={e => {
-                                        console.log(e);
-                                      }}>
+                                  <Slider {...settings}>
                                     {categorias.map((zz, i) => {
                                       return (
                                         <a
@@ -590,7 +619,7 @@ function Planes() {
                                         </a>
                                       );
                                     })}
-                                  </Flicking>
+                                  </Slider>
 
                                   </div>
 
@@ -660,15 +689,15 @@ function Planes() {
                             </Modal>
                           </div>
                           <div className="precio-plan">
-                            <strong>USD {x.tarifa.tarifaventa}</strong>
-                            <a href="#" className="seleccionar">
+                            <strong>USD {x.tarifa?.tarifaventa || "N/A"}</strong>
+                            <a onClick={()=>{preCheckout(x, viajeros)}}className="seleccionar">
                               Contratar
                             </a>
                             <div className="comparar-check">
                               <input
                                 type="checkbox"
                                 className="comparar-plan"
-                                name="one"
+                                id="one"
                                 checked={
                                   planSelected.includes(i) ? true : false
                                 }
@@ -682,7 +711,7 @@ function Planes() {
                                   }
                                 }}
                               />
-                              <label for="one">Comparar</label>
+                              <label htmlFor="one">Comparar</label>
                             </div>
                           </div>
                         </div>
@@ -754,7 +783,7 @@ function Planes() {
                               >
                                 {x.plan.nombre}
                               </p>
-                              <p>USD {x.tarifa.tarifaventa}</p>
+                              <p>USD {x.tarifa?.tarifaventa || "N/A"}</p>
                             </div>
                           </div>
                           <div className="botones-plan-card">
@@ -794,8 +823,7 @@ function Planes() {
                                     {x.coberturas.map((y) => {
                                       return (
                                         <>
-                                          {y.coberturaDetailed[0].destacada ===
-                                          1 ? (
+                                          {y.coberturaDetailed[0].destacada === 1 ? (
                                             <div className="contentFocusCover">
                                               <img
                                                 src={require("./static/Cobertura Check.png")}
@@ -854,13 +882,7 @@ function Planes() {
                                       {"plan" in planSelection && (
                                         <div className="modalBody">
                                           <div className="coberturas-botones mobile">
-                                          <Flicking
-                                            align="prev"
-                                            circular={false}
-                                            className="flicker"
-                                            onMoveEnd={e => {
-                                              console.log(e);
-                                            }}>
+                                          <Slider {...settings}>
                                             {categorias.map((zz, i) => {
                                               return (
                                                 <a
@@ -889,7 +911,7 @@ function Planes() {
                                                 </a>
                                               );
                                             })}
-                                            </Flicking>
+                                            </Slider>
                                           </div>
 
                                           {allCoberturas.map((xz) => {
@@ -956,7 +978,7 @@ function Planes() {
                             >
                               <strong>{x.plan.nombre}</strong>
                             </p>
-                            <strong>USD {x.tarifa.tarifaventa}</strong>
+                            <strong>USD {x.tarifa?.tarifaventa || "N/A"}</strong>
 
                             <div className="comparar-check">
                               <input

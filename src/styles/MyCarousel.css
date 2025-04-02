@@ -1,16 +1,19 @@
+/* CSS General */
+
 .seccion-promociones .carousel-container {
   width: 100%;
-  height: auto; /* O un valor fijo si lo prefieres */
-  overflow: hidden; /* Para evitar cualquier desbordamiento */
+  height: auto;
+  overflow: hidden;
 }
 
 .seccion-promociones .carousel-item {
-  width: auto;
+  width: 80%;
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   visibility: visible !important;
+  display: flex;
 }
 
 .seccion-promociones .carousel-image {
@@ -21,19 +24,19 @@
   visibility: visible !important;
   object-fit: cover !important;
   opacity: 1 !important;
-  filter: none !important; /* Elimina cualquier filtro de opacidad */
+  filter: none !important;
 }
 
 .seccion-promociones .slick-slide {
-  margin: 0; /* Elimina cualquier margen adicional */
-  padding: 0; /* Elimina cualquier padding adicional */
+  margin: 0;
+  padding: 0;
 }
 
 .seccion-promociones .slick-list {
-  height: auto; /* Ajusta la altura automáticamente */
-  margin: 0; /* Elimina cualquier margen extra */
-  padding: 0; /* Elimina cualquier padding extra */
-  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  height: auto;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 .seccion-promociones .slick-prev,
@@ -49,18 +52,116 @@
 
 .seccion-promociones .slick-prev:hover,
 .seccion-promociones .slick-next:hover {
-  color: #000000; /* Color al hacer hover */
+  color: #000000;
+}
+
+.seccion-promociones .slick-prev:focus,
+.seccion-promociones .slick-next:focus {
+  color: #cdcdcd;
 }
 
 .seccion-promociones .slick-prev {
-  right: 0; /* Ajusta según necesites para acercar las flechas */
+  left: -20px; /* Ajuste de la posición de la flecha anterior */
 }
 
 .seccion-promociones .slick-next {
-  left: 59.5rem; /* Ajusta según necesites para acercar las flechas */
+  right: -20px; /* Ajuste de la posición de la flecha siguiente */
 }
 
 .seccion-promociones .slick-prev::before,
 .seccion-promociones .slick-next::before {
-  display: none; /* Oculta las flechas predeterminadas */
+  display: none;
+}
+
+/* Responsivo para dispositivos móviles en orientación portrait */
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+  .seccion-promociones .carousel-item {
+    width: 60% !important; /* El item ocupará solo el 60% del ancho en móviles */
+    padding: 0 !important;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .seccion-promociones .slick-next {
+    right: 20px; /* Ajuste de la posición de la flecha siguiente */
+  }
+
+  .seccion-promociones .slick-prev {
+    left: 0px; /* Ajuste de la posición de la flecha anterior */
+  }
+
+  .seccion-promociones .slick-list {
+    padding: 0;
+    margin: 0;
+  }
+
+  .seccion-promociones .carousel-image {
+    max-width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+    height: auto;
+    margin: 0 !important;
+    display: block;
+    padding: 0 !important;
+  }
+
+  .slick-track {
+    left: 4.5rem;
+  }
+}
+
+/* Responsivo para dispositivos tablets en orientación portrait */
+@media only screen and (max-width: 1024px) and (orientation: portrait) {
+  .seccion-promociones .carousel-item {
+    width: 60%; /* El item ocupará solo el 60% del ancho en tablets */
+    padding: 0 !important;
+    box-sizing: border-box;
+    margin: 0; /* Centra el item horizontalmente */
+  }
+
+  .seccion-promociones .slick-next {
+    right: 15px; /* Ajuste de la posición de la flecha siguiente */
+  }
+
+  .seccion-promociones .slick-prev {
+    left: 15px; /* Ajuste de la posición de la flecha anterior */
+  }
+
+  .seccion-promociones .slick-list {
+    padding: 0; /* Un pequeño padding para tablets */
+  }
+
+  .seccion-promociones .carousel-image {
+    max-width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+    height: auto;
+    margin: 0;
+    display: block;
+    padding: 0;
+  }
+
+  .slick-track {
+    left: 4.5rem;
+  }
+}
+
+/* Ajuste general para la imagen dentro del carrusel */
+.seccion-promociones .carousel-image {
+  width: 100%; /* Asegura que la imagen ocupe el ancho completo del contenedor */
+  height: auto !important; /* Fija la altura de las imágenes a 300px */
+  margin: 0;
+  display: block;
+  padding: 0;
+}
+
+.seccion-promociones .slick-prev,
+.seccion-promociones .slick-next {
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.seccion-promociones .slick-list {
+  padding: 0 10px;
 }

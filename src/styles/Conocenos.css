@@ -1,0 +1,122 @@
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat"),
+    url(../static/Fonts/Montserrat-VariableFont_wght.ttf) format("truetype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat";
+}
+
+.conocenos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 65vh;
+  margin-top: 10%;
+}
+
+.conocenos-text {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: auto;
+  align-items: center;
+}
+
+.conocenos-text h1 {
+  text-align: left;
+  color: #249c8e;
+  font-size: 64px;
+  font-weight: 700;
+  margin-right: 285px;
+}
+
+.conocenos-text p {
+  margin-top: 30px;
+  text-align: justify;
+  font-weight: 500;
+  font-size: 24px;
+  color: #000;
+}
+
+.img-conocenos {
+  display: flex;
+  width: 50%;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.persona-conocenos {
+  width: 638px;
+  height: 459px;
+}
+
+.viajero-protegido {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 65vh;
+}
+
+.protegido-img {
+  display: flex;
+  width: 50%;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.viajero-protegido-info {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: auto;
+  align-items: start;
+  justify-content: center;
+}
+
+.viajero-protegido-info p {
+  text-align: justify;
+  font-weight: 500;
+  font-size: 24px;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+.viajero-protegido-info h1 {
+  text-align: justify;
+  color: #249c8e;
+  font-size: 64px;
+  font-weight: 700;
+  margin-right: 285px;
+}
+
+.persona-viajero {
+  width: 702px;
+  height: 505px;
+}
+
+.curva-nosotros {
+  display: flex;
+  width: 100%;
+  height: 280px;
+  background-image: url("../static/curva-nosotros.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-nosotros {
+  display: flex;
+  width: 100%;
+  height: 85vh;
+  background: linear-gradient(90deg, #5dbca3 0%, #008dc7 100%);
+}

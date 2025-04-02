@@ -7,7 +7,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import MediaQuery from "react-responsive";
 import Flicking from "@egjs/react-flicking";
 import "@egjs/react-flicking/dist/flicking.css";
- 
+import Slider from "react-slick";
+
+function filtrarCoberturasDestacadas(coberturas) {
+  return coberturas.filter((y) => y.coberturaDetailed[0].destacada === 1);
+}
+
 function BasicExample({ planSelected, setPlanSelected }) {
   const [menuVisible, setMenuVisible] = useState(false);
   const [isOpenModal, openModal, closeModal] = useModal(false);
@@ -34,9 +39,30 @@ function BasicExample({ planSelected, setPlanSelected }) {
   const [allCoberturas, setAllCoberturas] = useState([]);
   const [actualCategory, setActualCategory] = useState(1);
   let location = useLocation();
+  const prevArrow = (
+    <div className="arrowContainer">
+      <img className="imgSVG" src={require("../static/arrow-rightie.png")} />
+    </div>
+  );
+  const nextArrow = (
+    <div className="arrowContainer">
+      <img className="imgSVG" src={require("../static/arrow-leftie.png")} />
+    </div>
+  );
   let navigate = useNavigate();
   const data = location.state;
-
+  const settings = {
+    dots: false,
+    slidesToScroll: 1,
+    className: " variable-width sliderex",
+    slidesToShow: 1,
+    variableWidth: true,
+    infinite: true,
+    speed: 500,
+    cssEase: "linear",
+    nextArrow: prevArrow,
+    prevArrow: nextArrow,
+  };
   useEffect(() => {
     console.log(data);
     if (data === null) {
@@ -54,14 +80,18 @@ function BasicExample({ planSelected, setPlanSelected }) {
         var coberturas = data.data.securePlans[x].coberturas;
         var proveedor = data.data.securePlans[x].proveedor;
         var tarifa = data.data.securePlans[x].tarifa;
-        tarifax.push(tarifa.tarifaventa);
+        if (tarifa && tarifa.tarifaventa) {
+          tarifax.push(tarifa.tarifaventa);
+        }
         coberturas.forEach((element) => {
-          if (element.coberturaDetailed[0].filtro === 1) {
-            if (cobertx.some((e) => e.id === element.coberturaDetailed[0].id)) {
+          if ( element.coberturaDetailed !== undefined){
+          if (element.coberturaDetailed.filtro === 1) {
+            if (cobertx.some((e) => e.id === element.coberturaDetailed.id)) {
             } else {
-              cobertx.push(element.coberturaDetailed[0]);
+              cobertx.push(element.coberturaDetailed);
             }
           }
+        }
         });
 
         if (providerx.some((e) => e.id === proveedor.id)) {
@@ -114,8 +144,8 @@ function BasicExample({ planSelected, setPlanSelected }) {
       setSecurePlans(newOrder);
     }
   };
-  if (planSelected.length === 0){
-    return(<></>)
+  if (planSelected.length === 0) {
+    return <></>;
   }
   return (
     <Accordion defaultActiveKey="1">
@@ -133,7 +163,7 @@ function BasicExample({ planSelected, setPlanSelected }) {
                       className="img-card-acordeon"
                     />
                     <strong>
-                     USD {securePlans[planSelected[0]].tarifa.tarifaventa}
+                      USD {securePlans[planSelected[0]].tarifa.tarifaventa}
                     </strong>
                     <a
                       className="close-boton"
@@ -198,7 +228,7 @@ function BasicExample({ planSelected, setPlanSelected }) {
                       className="img-card-acordeon"
                     />
                     <strong>
-                     USD {securePlans[planSelected[2]].tarifa.tarifaventa}
+                      USD {securePlans[planSelected[2]].tarifa.tarifaventa}
                     </strong>
 
                     <a
@@ -272,36 +302,38 @@ function BasicExample({ planSelected, setPlanSelected }) {
                   Comparar
                 </a>
               )}
-              <Modal isOpen={isOpenModal} closeModal={closeModal}>
+              <Modal isOpen={isOpenModal} navBar={true} closeModal={closeModal}>
                 {planSelected.length >= 2 && (
                   <>
                     <div className="coberturas-botones">
-                      {categorias.map((zz, i) => {
-                        return (
-                          <a
-                            className="boton-cobertura"
-                            onClick={() => {
-                              setActualCategory(zz.id);
-                            }}
-                            style={
-                              actualCategory === zz.id
-                                ? {
-                                    background: "#008DC7",
-                                    color: "white",
-                                    transition: "all 0.3s linear",
-                                  }
-                                : {
-                                    background: "#F5F7F8",
-                                    color: "#959999",
-                                    transition: "all 0.2s linear",
-                                  }
-                            }
-                          >
-                            {" "}
-                            {zz.nombre}
-                          </a>
-                        );
-                      })}
+                      <Slider {...settings}>
+                        {categorias.map((zz, i) => {
+                          return (
+                            <a
+                              className="boton-cobertura"
+                              onClick={() => {
+                                setActualCategory(zz.id);
+                              }}
+                              style={
+                                actualCategory === zz.id
+                                  ? {
+                                      background: "#008DC7",
+                                      color: "white",
+                                      transition: "all 0.3s linear",
+                                    }
+                                  : {
+                                      background: "#F5F7F8",
+                                      color: "#959999",
+                                      transition: "all 0.2s linear",
+                                    }
+                              }
+                            >
+                              {" "}
+                              {zz.nombre}
+                            </a>
+                          );
+                        })}
+                      </Slider>
                     </div>
                     <div className="cards">
                       {planSelected.map((xy) => {
@@ -438,44 +470,43 @@ function BasicExample({ planSelected, setPlanSelected }) {
                   Comparar
                 </a>
               )}
-              <Modal isOpen={isOpenModal} closeModal={closeModal} isMobile={true}>
+              <Modal
+                isOpen={isOpenModal}
+                navBar={true}
+                closeModal={closeModal}
+                isMobile={true}
+              >
                 {planSelected.length >= 2 && (
                   <>
-                    <div className="coberturas-botones mobile">
-                    <Flicking
-                      align="prev"
-                      circular={false}
-                      className="flicker"
-                      onMoveEnd={e => {
-                        console.log(e);
-                      }}>
-                      {categorias.map((zz, i) => {
-                        return (
-                          <a
-                            className="boton-cobertura"
-                            onClick={() => {
-                              setActualCategory(zz.id);
-                            }}
-                            style={
-                              actualCategory === zz.id
-                                ? {
-                                    background: "#008DC7",
-                                    color: "white",
-                                    transition: "all 0.3s linear",
-                                  }
-                                : {
-                                    background: "#F5F7F8",
-                                    color: "#959999",
-                                    transition: "all 0.2s linear",
-                                  }
-                            }
-                          >
-                            {" "}
-                            {zz.nombre}
-                          </a>
-                        );
-                      })}
-                      </Flicking>
+                    <div className="coberturas-botones">
+                      <Slider {...settings}>
+                        {categorias.map((zz, i) => {
+                          return (
+                            <a
+                              className="boton-cobertura"
+                              onClick={() => {
+                                setActualCategory(zz.id);
+                              }}
+                              style={
+                                actualCategory === zz.id
+                                  ? {
+                                      background: "#008DC7",
+                                      color: "white",
+                                      transition: "all 0.3s linear",
+                                    }
+                                  : {
+                                      background: "#F5F7F8",
+                                      color: "#959999",
+                                      transition: "all 0.2s linear",
+                                    }
+                              }
+                            >
+                              {" "}
+                              {zz.nombre}
+                            </a>
+                          );
+                        })}
+                      </Slider>
                     </div>
                     <div className="cards">
                       {planSelected.map((xy) => {

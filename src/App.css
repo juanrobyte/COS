@@ -401,6 +401,7 @@ input[type=number]::-webkit-outer-spin-button {
   text-decoration: none !important;
   cursor: pointer;
   color: black;
+  font-weight: 600 !important;
 }
 
 .tyc {
@@ -412,7 +413,7 @@ input[type=number]::-webkit-outer-spin-button {
 .modalPassenger {
   display: flex;
   flex-direction: column;
-  width: 18vw;
+  width: 15vw;
   top: 20vh;
   left: 2vw;
   height: 33vh;
@@ -421,6 +422,11 @@ input[type=number]::-webkit-outer-spin-button {
   align-items: center;
   box-shadow: 0px 4px 16px 0px #00000026;
   border-radius: 20px;
+}
+
+.modalPassenger input:focus {
+  outline: none;
+  border-color: #009C8C;
 }
 
 .icon-trash {
@@ -526,6 +532,7 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: pointer;
   background-position: center;
   transition: all 0.3s ease;
+  font-weight: 600;
 }
 
 .content-Slider {

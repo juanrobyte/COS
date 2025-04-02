@@ -1,0 +1,774 @@
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat"),
+    url(../static/Fonts/Montserrat-VariableFont_wght.ttf) format("truetype");
+}
+
+* {
+  font-family: "Montserrat";
+}
+
+.Viajeros {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  gap: 40px;
+  background: #f5f7f8;
+}
+
+#Viajeros-seccion {
+  background: #f5f7f8;
+}
+
+.volver-btn {
+  width: 68px;
+  height: 37px;
+  background-color: #e2e7e6;
+  border-radius: 18px;
+  padding: 12px, 16px, 12px, 16px;
+  align-self: flex-start;
+  margin-left: 7%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 9rem;
+}
+
+.datos-viajero-section {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  padding: 0 6rem;
+}
+
+.viajeros-left-section {
+  width: 75%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.titulo-datos {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.titulo-datos p {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29.26px;
+  color: #2c2c2c;
+  font-family: "Montserrat";
+  margin-left: 1.5rem;
+}
+
+.viajeros-rigth-section {
+  width: 25%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.titulo-resumen-compra {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.titulo-resumen-compra p {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29.26px;
+  color: #2c2c2c;
+  font-family: "Montserrat";
+}
+
+.card-datos-viajero {
+  width: 100%;
+  min-width: 868px;
+  min-height: 19.1rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  background: #fff;
+  justify-content: flex-start;
+  gap: 30px;
+  box-shadow: 0px 4px 16px 0px #00000026;
+}
+
+.card-contacto-emergencia {
+  width: 100%;
+  min-width: 868px;
+  min-height: 239px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  background: #fff;
+  justify-content: flex-start;
+  gap: 30px;
+  box-shadow: 0px 4px 16px 0px #00000026;
+}
+
+.titulo-card-viajero {
+  margin-top: 1.5rem;
+  margin-left: 2rem;
+}
+
+.titulo-card-viajero p {
+  font-family: "Montserrat";
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24.38px;
+  color: #009c8c;
+}
+
+.form-card-datos {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: auto;
+  padding: 0 1.3rem;
+  gap: 5px;
+}
+
+.form-datos-sec1 {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 20px;
+}
+
+.form-datos-sec2 {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 20px;
+  align-items: center;
+}
+
+.titular-viajero {
+  display: flex;
+  justify-content: start;
+  color: #37b3e8;
+  width: 95%;
+  align-items: center;
+  gap: 10px;
+  padding: 0 1rem;
+  min-height: 50px;
+}
+
+.custom-checkbox-titular {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.custom-checkbox-titular input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.custom-checkbox-titular .checkmark {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-color: #d3d3d3;
+  border-radius: 4px;
+  position: relative;
+}
+
+.custom-checkbox-titular input:checked + .checkmark {
+  background-color: #fff;
+  border: 1px solid #d3d3d3;
+}
+
+.custom-checkbox-titular input:checked + .checkmark::after {
+  display: block;
+}
+
+.custom-checkbox-titular .checkmark::after {
+  content: "";
+  position: absolute;
+  left: 51%;
+  top: 47%;
+  width: 18px; /* Ajusta el tamaño del checkmark */
+  height: 9px;
+  border: solid #37b3e8;
+  border-width: 0 0 4px 4px;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  display: none;
+}
+
+.custom-checkbox-titular .checkbox-label {
+  margin-left: 8px;
+  color: #37b3e8;
+  font-size: 16px;
+}
+
+.input-container-datos {
+  position: relative;
+  width: 95%;
+}
+
+.input-container-datos .rs-stack-item {
+  width: 36.875rem;
+  max-height: 50px;
+  font-size: 14px;
+  border: 1px solid #f4f4f4;
+  border-radius: 20px;
+  outline: none;
+  background-color: #f7f7f7;
+  transition: border 0.3s ease;
+  text-align: center; /* Centra el texto del input */
+  font-weight: 500;
+}
+
+/* Borde rojo cuando hay un error */
+.error-input {
+  border-color: red;
+}
+
+/* Mensaje de error */
+.error-message {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: red;
+  font-size: 0.8rem;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.input-container-datos select .error-input {
+  border-color: red; /* Aplica borde rojo al select cuando hay error */
+}
+
+.input-container-datos .rs-input-group-inside {
+  border: none;
+  width: 36.875rem;
+  max-height: 50px;
+}
+
+.input-container-datos .rs-input-group-inside::placeholder {
+  text-align: start;
+}
+
+.input-container-datos input {
+  width: 100%;
+  min-height: 50px;
+  font-size: 14px;
+  border: 1px solid #f4f4f4;
+  border-radius: 20px;
+  outline: none;
+  background-color: #f7f7f7;
+  transition: border 0.3s ease;
+  text-align: center; /* Centra el texto del input */
+  font-weight: 500;
+}
+
+.input-container-datos input:focus {
+  border: 1px solid #f4f4f4;
+  background-color: #fff;
+  text-align: left; /* Vuelve el texto alineado a la izquierda al hacer focus */
+}
+
+.input-container-datos label {
+  position: absolute;
+  top: 50%;
+  left: 9%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  color: #888;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  text-align: left; /* Asegura que el texto del label esté centrado */
+}
+
+.documento {
+  left: 20% !important;
+}
+
+.correo-electronico {
+  left: 16% !important;
+}
+
+.fecha-nacimiento {
+  left: 18% !important;
+}
+
+.input-container-datos .fecha-nacimiento input:focus ~ label,
+.input-container-datos .fecha-nacimiento input:valid ~ label {
+  left: 50% !important;
+}
+
+.input-container-datos input[type="number"]::-webkit-outer-spin-button,
+.input-container-datos input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.documento input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.input-container-datos input:valid {
+  text-align: left;
+  background-color: #fff;
+}
+
+.input-container-datos input:focus ~ label,
+.input-container-datos input:valid ~ label {
+  top: 5px;
+  left: 40%;
+  font-size: 10px;
+  font-weight: 500;
+  color: #000;
+  background-color: transparent;
+  padding: 0 5px;
+  transform: translateY(0); /* Resetea la transformación */
+}
+
+.input-container-datos input:not(:focus):placeholder-shown ~ label {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.select-container-datos {
+  position: relative;
+  width: 95%; /* Ajusta el ancho según tus necesidades */
+  min-height: 50px;
+}
+
+.floating-label {
+  position: absolute;
+  top: 50%;
+  left: 3%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #888;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.select-container-datos.focused .floating-label {
+  top: 10px;
+  left: 30%;
+  font-size: 12px;
+  color: #000;
+  background-color: transparent;
+  padding: 0 5px;
+}
+
+.select-container-datos select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #f4f4f4;
+  border-radius: 20px;
+  background-color: #f7f7f7;
+  appearance: none;
+  outline: none;
+  min-height: 50px;
+  padding-top: 15px;
+}
+
+select option {
+  padding: 10px;
+}
+
+.card-resumen {
+  width: auto;
+  min-width: 364px;
+  min-height: 432px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  background: #fff;
+  justify-content: flex-start;
+  gap: 30px;
+  box-shadow: 0px 4px 16px 0px #00000026;
+  align-items: center;
+  padding: 2rem 2rem;
+}
+
+.plan-contratado {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.img-card-plan-contratado {
+  width: 100%;
+  height: 60px;
+}
+
+.plan-contratado h1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 29.26px;
+  color: #000;
+}
+
+.detalles-plan-contratado {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-top: 1px solid #e0e8fd;
+  border-bottom: 1px solid #e0e8fd;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 100%;
+}
+
+.detalles-plan-contratado p {
+  margin-top: 0;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Montserrat";
+  color: #000;
+}
+
+.detalles-plan-contratado h1 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 17.07px;
+  color: #008dc7;
+}
+
+.viajeros-plan-contratado {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar-viajeros-contratado {
+  width: 12.22px;
+  height: 15.41px;
+}
+
+.destino-plan-contratado {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.mapmarker-destino-contratado {
+  width: 12.22px;
+  height: 15.41px;
+}
+
+.daysDiff {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.daysDiff p {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 14.63px;
+  color: #000;
+}
+
+.daysDiff p:nth-of-type(2) {
+  color: #009c8c;
+  margin-top: 0;
+}
+
+.precio-total {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.precio-total p {
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #009c8c;
+  line-height: 24.38px;
+}
+
+.calendar-daysDiff {
+  width: 12.22px;
+  height: 15.41px;
+}
+
+.button-continuar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 208px;
+  height: 38px;
+  border-radius: 18px;
+  padding: 12px, 16px, 12px, 16px;
+  background: #2c1fbd;
+  cursor: pointer;
+  color: #fff;
+}
+
+.button-continuar .disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button-continuar button {
+  border: none;
+  background: transparent;
+}
+
+.button-continuar a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff !important;
+}
+
+.button-continuar a:hover {
+  color: #fff !important;
+}
+
+.button-continuar a:focus {
+  color: #fff !important;
+}
+
+/* .button-continuar .modal.is-open {
+  background-color: #131313;
+} */
+
+.button-continuar .modal-close {
+  border: none;
+  position: absolute;
+  top: 0.875rem;
+  right: 0.563rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: right;
+  align-items: flex-end;
+}
+
+.button-continuar .boton-container {
+  width: 100%;
+  background: #eff8f5;
+  margin: 0;
+  padding: 0px 10px;
+  top: 0;
+  right: 0;
+  min-height: 3.313rem;
+  display: none;
+}
+
+.button-continuar .modal-container {
+  position: relative;
+  overflow-y: auto;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0px 4px 16px 0px #00000026;
+  width: 25%;
+  height: 360px;
+}
+
+.redirection-alert {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 0.6rem;
+  height: 100%;
+}
+
+.redirection-alert h1 {
+  color: red;
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-align: center;
+  line-height: 3rem;
+}
+
+.redirection-alert p {
+  color: #000;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.9rem;
+}
+
+.alert-modal {
+  width: 2rem;
+  height: 2rem;
+}
+
+.button-continuar .comparationContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 360px;
+}
+
+@media (min-width: 1280px) and (max-width: 1440px) {
+  .card-resumen {
+    width: auto;
+    min-width: 35%;
+    min-height: 35.5rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    background: #fff;
+    justify-content: space-around;
+    gap: 30px;
+    box-shadow: 0px 4px 16px 0px #00000026;
+    align-items: center;
+    padding: 2rem 2rem;
+  }
+
+  .input-container-datos .rs-stack-item {
+    width: 28.5rem;
+    max-height: 50px;
+    font-size: 14px;
+    border: 1px solid #f4f4f4;
+    border-radius: 20px;
+    outline: none;
+    background-color: #f7f7f7;
+    transition: border 0.3s ease;
+    text-align: center; /* Centra el texto del input */
+    font-weight: 500;
+  }
+
+  .error-message {
+    font-size: 0.65rem;
+  }
+
+  .datos-viajero-section {
+    padding: 3rem;
+  }
+
+  .documento {
+    left: 24% !important;
+  }
+
+  .correo-electronico {
+    left: 18% !important;
+  }
+}
+
+@media (orientation: portrait) {
+  .card-resumen {
+    display: none;
+  }
+
+  .titulo-datos {
+    display: none;
+  }
+
+  .titulo-resumen-compra {
+    display: none;
+  }
+
+  .viajeros-left-section {
+    display: none;
+  }
+
+  .viajeros-rigth-section {
+    display: none;
+  }
+
+  .volver-btn {
+    display: flex;
+    width: 60px;
+    height: 30px;
+    background-color: #e2e7e6;
+    border-radius: 18px;
+    padding: 12px, 16px, 12px, 16px;
+    align-self: flex-start;
+    margin-left: 2.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .resumen-compra-box {
+    display: flex;
+    width: 100%;
+    min-height: 3.125rem;
+    height: auto;
+    box-shadow: 0px 4px 16px 0px #00000026;
+    position: sticky;
+    top: 5rem;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .img-card-plan-contratado {
+    width: 6rem;
+    height: 2rem;
+  }
+
+  .plan-contratado {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    margin: 0;
+    padding: 5px;
+  }
+
+  .plan-contratado h1 {
+    font-size: 0.75rem;
+  }
+
+  .precio-total {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ver-mas-detalles-compra {
+    display: flex;
+    width: 35%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .datos-viajero-section-mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    
+  }
+}

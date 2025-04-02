@@ -155,7 +155,7 @@ function App() {
 
 
   useEffect(() => {
-    axios.get('http://compara-seguro.com:5000/paises')
+    axios.get('https://api.compara-seguro.com/paises')
       .then((res) => {
         const destinox = []
         const paisex = []
@@ -185,7 +185,7 @@ function App() {
       alert("Introduce los valores requeridos")
       return
     }
-    axios.post('http://compara-seguro.com:5000/cotizar', {
+    axios.post('https://api.compara-seguro.com/cotizar', {
       origen: origenSelected,
       destinos: destinoSelected,
       fechaStart: fechaIda,

@@ -13,6 +13,8 @@ import {
 import Terms from './Terms';
 import Products from './Productos';
 import Home from './Home'
+import Viajeros from './Viajeros.js'
+import Pagos from './Pagos.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
   {
     path: '/Testing',
     element: <App />
+  },
+  {
+    path: '/Viajeros',
+    element: <Viajeros/>
+  },
+  {
+    path: '/Pagos',
+    element: <Pagos/>
   }
   
 ]);

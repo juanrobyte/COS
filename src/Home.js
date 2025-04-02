@@ -23,8 +23,6 @@ import { components } from "react-select";
 import { border, styled, width } from "@mui/system";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { PhoneInput } from "react-international-phone";
-import "react-international-phone/style.css";
 import Accordion from "react-bootstrap/Accordion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer2 from "./components/Footer.js";
@@ -38,6 +36,8 @@ import SliderSponsors from "./components/SliderSponsors.js";
 import MyCarousel from "./components/CarouselPromos.js";
 import trash from "./static/ICON-TRASH.svg";
 import "./styles/CarouselBlog.css";
+import intlTelInput from "intl-tel-input";
+import "intl-tel-input/build/css/intlTelInput.css";
 
 const {
   allowedMaxDays,
@@ -51,21 +51,27 @@ const {
 const customStyles = {
   control: (provided) => ({
     ...provided,
-    width: "100%", // Asegura que el select ocupe todo el ancho del contenedor
+    width: "100%",
     backgroundColor: "#F7F7F7",
     borderRadius: "10px",
     border: "1px solid #E0E0E0",
     boxShadow: "none",
-    minHeight: "50px",
+    minHeight: "50px", // Altura por defecto
     padding: "0px 10px",
     display: "flex",
     alignItems: "center",
     flexWrap: "wrap",
-    maxWidth: "250px", // Ajusta según el tamaño máximo que quieras permitir
-    fontFamily: "Montserrat", // Establece la fuente Montserrat
+    maxWidth: "250px",
+    fontFamily: "Montserrat",
     fontSize: "14px",
-    fontWeight: 500, // Espesor de fuente 500 en el input
-    color: "#000", // Color de texto por defecto
+    fontWeight: 600,
+    color: "#000",
+    // Añadir media query para portrait mode
+    "@media (orientation: portrait)": {
+      minHeight: "30px", // Altura para portrait
+      width: "100%",
+      justifyContent: "space-between",
+    },
   }),
   valueContainer: (provided) => ({
     ...provided,
@@ -73,13 +79,13 @@ const customStyles = {
   }),
   singleValue: (provided) => ({
     ...provided,
-    color: "#000", // Color de texto por defecto
-    fontWeight: 500, // Espesor de fuente 500 para el valor seleccionado
+    color: "#000",
+    fontWeight: 600,
   }),
   placeholder: (provided) => ({
     ...provided,
     color: "#000", // Color del placeholder
-    fontWeight: 500, // Espesor de fuente 500 en el placeholder
+    fontWeight: 600, // Espesor de fuente 500 en el placeholder
   }),
   indicatorsContainer: (provided) => ({
     ...provided,
@@ -187,7 +193,7 @@ function Home() {
   const [fechaIda, setFechaIda] = useState("");
   const [fechaVuelta, setFechaVuelta] = useState("");
   const [email, setEmail] = useState("");
-  const [cardOne, setCardOne] = useState(false);
+  const [entries, setEntries] = useState([]);
   const [cardTwo, setCardTwo] = useState(true);
   const [cardThree, setCardThree] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -201,32 +207,10 @@ function Home() {
   const emailRef = useRef(null);
   const phoneRef = useRef(null);
   const couponRef = useRef(null);
-  const blue = {
-    100: "#daecff",
-    200: "#b6daff",
-    300: "#66b2ff",
-    400: "#3399ff",
-    500: "#007fff",
-    600: "#0072e5",
-    700: "#0059B2",
-    800: "#004c99",
-  };
-
-  const grey = {
-    50: "#F3F6F9",
-    100: "#E5EAF2",
-    200: "#DAE2ED",
-    300: "#C7D0DD",
-    400: "#B0B8C4",
-    500: "#9DA8B7",
-    600: "#6B7A90",
-    700: "#434D5B",
-    800: "#303740",
-    900: "#1C2025",
-  };
+  const modalRef = useRef(null);
 
   const StyledInputRoot = styled("div")`
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "Montserrat", sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -259,6 +243,26 @@ function Home() {
       />
     </StyledInputRoot>
   );
+
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      setVisibility("none");
+      setModalOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (modalOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [modalOpen]);
+
   const changeModal = () => {
     if (modalOpen === true) {
       setVisibility("none");
@@ -313,7 +317,7 @@ function Home() {
 
     axios
       .post(
-        "http://compara-seguro.com:5000/cotizar",
+        "https://api.compara-seguro.com/cotizar",
         {
           origen: origenSelected,
           destinos: destinoSelected,
@@ -335,21 +339,17 @@ function Home() {
       )
       .then((response) => {
         if (response.data.status === 200) {
-          navigate("/planes", { state: { data: response.data } });
+          navigate("/planes", {
+            state: { data: response.data, countryCode: countryCode },
+          });
         }
       })
       .catch((error) => {});
   };
 
   useEffect(() => {
-    console.log(passengersAmount);
-  }, [passengersAmount]);
-
-  useEffect(() => {}, [passengers]);
-
-  useEffect(() => {
     axios
-      .get("http://compara-seguro.com:5000/paises")
+      .get("https://api.compara-seguro.com/paises")
       .then((res) => {
         const destinox = [];
         const paisex = [];
@@ -372,31 +372,62 @@ function Home() {
         setOrigen(paisex);
       })
       .catch((err) => console.log(err));
+    axios
+      .get(
+        "https://blog.compara-seguro.com/wp-json/wp/v2/posts/?filter[posts_per_page]=5"
+      )
+      .then((response) => {
+        setEntries(response.data);
+      });
   }, []);
 
-  const images = [
-    require("./static/sponsor1.png"),
-    require("./static/sponsor2.png"),
-    require("./static/sponsor3.png"),
-  ];
+  // Estado para manejar el índice actual
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const [currentImages, setCurrentImages] = useState([0, 1, 2]);
-
+  // Función para rotar hacia la izquierda
   const rotateLeft = () => {
-    setCurrentImages((prevImages) => [
-      prevImages[1], // La imagen de la derecha pasa al centro
-      prevImages[2], // La imagen del centro pasa a la izquierda
-      prevImages[0], // La imagen de la izquierda pasa a la derecha
-    ]);
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? entries.length - 1 : prevIndex - 1
+    );
   };
 
+  // Función para rotar hacia la derecha
   const rotateRight = () => {
-    setCurrentImages((prevImages) => [
-      prevImages[2], // La imagen de la izquierda pasa al centro
-      prevImages[0], // La imagen del centro pasa a la derecha
-      prevImages[1], // La imagen de la derecha pasa a la izquierda
-    ]);
+    setCurrentIndex((prevIndex) =>
+      prevIndex === entries.length - 1 ? 0 : prevIndex + 1
+    );
   };
+
+  const inputRef = useRef(null);
+  const [countryCode, setCountryCode] = useState("us"); // Colombia como país por defecto
+
+  useEffect(() => {
+    // Obtener la ubicación del usuario para determinar el país
+    axios
+      .get("https://ipapi.co/json/")
+      .then((response) => {
+        const detectedCountryCode = response.data.country_code.toLowerCase();
+        setCountryCode(detectedCountryCode);
+      })
+      .catch((error) => {
+        console.error(
+          "No se pudo obtener la ubicación, usando el país por defecto:",
+          error
+        );
+      });
+
+    const iti = intlTelInput(inputRef.current, {
+      initialCountry: countryCode,
+      utilsScript:
+        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", // Necesario para formateo y validación
+    });
+
+    return () => {
+      if (iti) {
+        iti.destroy();
+      }
+    };
+  }, [countryCode]);
 
   return (
     <div className="Home">
@@ -495,7 +526,7 @@ function Home() {
                           moment(event[1]).utc().format("YYYY-MM-DD")
                         );
                       }}
-                      style={{ fontWeight: "500", color: "#000",}}
+                      style={{ fontWeight: "500", color: "#000" }}
                       caretAs={FaChevronDown}
                       placeholder="¿Cuándo Viajas?"
                       format="dd/MM/yyyy"
@@ -523,20 +554,36 @@ function Home() {
               <div className="email Mobile" ref={emailRef}>
                 <img src={require("./static/Email.png")} draggable={false} />
                 <input
+                  name="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Correo electronico"
+                  required
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                  onInvalid={(e) =>
+                    e.target.setCustomValidity(
+                      "Por favor, ingresa una dirección de correo válida"
+                    )
+                  }
+                  onInput={(e) => e.target.setCustomValidity("")}
+                  autoComplete="email"
                 />
               </div>
 
-              <div className="phoneNumber Mobile" ref={phoneRef}>
-                <PhoneInput
-                  autoFormat={true}
-                  placeholder="Celular"
-                  autoDefaultCountry={true}
+              <div className="phoneNumber Mobile">
+                <input
+                  ref={inputRef}
+                  type="tel"
+                  id="phone"
+                  name="phone"
                   value={phoneNumber}
-                  onChange={(phone) => setPhoneNumber(phone)}
+                  onInput={(phone) => {
+                    setPhoneNumber(phone.target.value);
+                  }}
+                  placeholder="Teléfono"
+                  style={{ width: "100%" }}
+                  autoComplete="tel"
                 />
               </div>
 
@@ -571,7 +618,7 @@ function Home() {
                   Array.from(Array(passengersAmount), (e, index) => {
                     return (
                       <div className="ageCard" key={index}>
-                        <span>Edad actual viajero {index + 1}</span>
+                        <span>Edad viajero {index + 1}</span>
                         <input
                           type="number"
                           className="edad-viajero"
@@ -704,19 +751,35 @@ function Home() {
             <div className="email">
               <img src={require("./static/Email.png")} draggable={false} />
               <input
+                name="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Correo electronico"
+                required
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                onInvalid={(e) =>
+                  e.target.setCustomValidity(
+                    "Por favor, ingresa una dirección de correo válida"
+                  )
+                }
+                onInput={(e) => e.target.setCustomValidity("")}
+                autoComplete="email"
               />
             </div>
             <div className="phoneNumber">
-              <PhoneInput
-                placeholder="Celular"
-                autoFormat={true}
-                autoDefaultCountry={true}
+              <input
+                ref={inputRef}
+                type="tel"
+                id="phone"
+                name="phone"
                 value={phoneNumber}
-                onChange={(phone) => setPhoneNumber(phone)}
+                onInput={(phone) => {
+                  setPhoneNumber(phone.target.value);
+                }}
+                placeholder="Teléfono"
+                style={{ width: "100%" }}
+                autoComplete="tel"
               />
             </div>
 
@@ -726,7 +789,7 @@ function Home() {
             </div>
           </div>
           <div className="sec3-form">
-            <div style={{ display: visibility }} className="modalPassenger">
+            <div ref={modalRef} style={{ display: visibility }} className="modalPassenger">
               <div className="columna1">
                 <span>Numero de viajeros</span>
                 <CustomNumberInput
@@ -741,7 +804,7 @@ function Home() {
                   Array.from(Array(passengersAmount), (e, index) => {
                     return (
                       <div className="ageCard" key={index}>
-                        <span>Edad actual viajero {index + 1}</span>
+                        <span>Edad viajero {index + 1}</span>
                         <input
                           type="number"
                           className="edad-viajero"
@@ -890,19 +953,35 @@ function Home() {
             <div className="email">
               <img src={require("./static/Email.png")} draggable={false} />
               <input
+                name="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Correo electronico"
+                required
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                onInvalid={(e) =>
+                  e.target.setCustomValidity(
+                    "Por favor, ingresa una dirección de correo válida"
+                  )
+                }
+                onInput={(e) => e.target.setCustomValidity("")}
+                autoComplete="email"
               />
             </div>
             <div className="phoneNumber">
-              <PhoneInput
-                placeholder="Celular"
-                autoFormat={true}
-                autoDefaultCountry={true}
+              <input
+                ref={inputRef}
+                type="tel"
+                id="phone"
+                name="phone"
                 value={phoneNumber}
-                onChange={(phone) => setPhoneNumber(phone)}
+                onInput={(phone) => {
+                  setPhoneNumber(phone.target.value);
+                }}
+                placeholder="Teléfono"
+                style={{ width: "100%" }}
+                autoComplete="tel"
               />
             </div>
 
@@ -912,7 +991,7 @@ function Home() {
             </div>
           </div>
           <div className="sec3-form">
-            <div style={{ display: visibility }} className="modalPassenger">
+            <div ref={modalRef} style={{ display: visibility }} className="modalPassenger">
               <div className="columna1">
                 <span>Numero de viajeros</span>
                 <input
@@ -939,7 +1018,7 @@ function Home() {
                   Array.from(Array(passengersAmount), (e, index) => {
                     return (
                       <div className="ageCard" key={index}>
-                        <span>Edad actual viajero {index + 1}</span>
+                        <span>Edad viajero {index + 1}</span>
                         <div className="ageCard-sec1">
                           <input
                             type="number"
@@ -1001,7 +1080,7 @@ function Home() {
             </h1>
           </div>
           <div className="promociones-slide">
-            {/* <MyCarousel /> */}
+            <MyCarousel />
           </div>
         </div>
       </MediaQuery>
@@ -1192,10 +1271,6 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accor-2">
-              <Accordion>
                 <Accordion.Item eventKey="1">
                   <Accordion.Header>
                     <img
@@ -1217,11 +1292,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accor-3">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="2">
                   <Accordion.Header>
                     <img
                       draggable={false}
@@ -1242,11 +1313,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accor-4">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="3">
                   <Accordion.Header>
                     <img
                       draggable={false}
@@ -1267,11 +1334,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accor-5">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="4">
                   <Accordion.Header>
                     <img
                       draggable={false}
@@ -1292,11 +1355,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accor-6">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="5">
                   <Accordion.Header>
                     <img
                       draggable={false}
@@ -1669,224 +1728,121 @@ function Home() {
           </div>
         </div>
       </MediaQuery>
-      <MediaQuery orientation={"portrait"}>
-        <div className="seccion-nuestros-seguros">
-          <div className="titulo-nuestros-seguros">
-            <h1>
-              Nuestros seguros
-              <br />
-              tienen las
-              <br />
-              coberturas que
-              <br />
-              necesitas
-            </h1>
-          </div>
-          <div className="nuestros-seguros-acordeones">
-            <div className="accor-1">
-              <Accordion>
-                <Accordion.Item eventKey="0">
-                  <Accordion.Header>
-                    <img
-                      draggable={false}
-                      src={require("./static/piezas/PIEZAS GRAFICAS WEB - COMPARASEGURO-07.png")}
-                      alt="Asistencia médica"
-                      className="accor-img"
-                    />
-                    Asistencia médica internacional
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </Accordion.Body>
-                </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accor-2">
-              <Accordion>
-                <Accordion.Item eventKey="1">
-                  <Accordion.Header>
-                    <img
-                      draggable={false}
-                      src={require("./static/piezas/PIEZAS GRAFICAS WEB - COMPARASEGURO-08.png")}
-                      alt="Asistencia médica"
-                      className="accor-img"
-                    />
-                    Medicamentos
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </Accordion.Body>
-                </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accor-3">
-              <Accordion>
-                <Accordion.Item eventKey="0">
-                  <Accordion.Header>
-                    <img
-                      draggable={false}
-                      src={require("./static/piezas/PIEZAS GRAFICAS WEB - COMPARASEGURO-09.png")}
-                      alt="Asistencia médica"
-                      className="accor-img"
-                    />
-                    Cancelación de Vuelos
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </Accordion.Body>
-                </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accor-4">
-              <Accordion>
-                <Accordion.Item eventKey="0">
-                  <Accordion.Header>
-                    <img
-                      draggable={false}
-                      src={require("./static/piezas/PIEZAS GRAFICAS WEB - COMPARASEGURO-10.png")}
-                      alt="Asistencia médica"
-                      className="accor-img"
-                    />
-                    Asistencia Médica con Preexistencias
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </Accordion.Body>
-                </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accor-5">
-              <Accordion>
-                <Accordion.Item eventKey="0">
-                  <Accordion.Header>
-                    <img
-                      draggable={false}
-                      src={require("./static/piezas/PIEZAS GRAFICAS WEB - COMPARASEGURO-11.png")}
-                      alt="Asistencia médica"
-                      className="accor-img"
-                    />
-                    Odontología
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </Accordion.Body>
-                </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accor-6">
-              <Accordion>
-                <Accordion.Item eventKey="0">
-                  <Accordion.Header>
-                    <img
-                      draggable={false}
-                      src={require("./static/piezas/PIEZAS GRAFICAS WEB - COMPARASEGURO-12.png")}
-                      alt="Asistencia médica"
-                      className="accor-img"
-                    />
-                    Pérdida de Equipaje
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                  </Accordion.Body>
-                </Accordion.Item>
-              </Accordion>
-            </div>
-          </div>
-        </div>
-      </MediaQuery>
       <MediaQuery orientation={"landscape"}>
-      <div className="seccion-blog">
-      <div className="sec1-blog">
-        <div className="text-btn-blog">
-          <div className="textos-blog">
-            <h1>
-              Consejos
-              <br />
-              únicos te
-              <br />
-              esperan en
-              <br />
-              nuestro blog
-            </h1>
-          </div>
-          <div className="botones-blog">
-            <a href="#" className="ver-mas-art">
-              Ver más artículos
-            </a>
-            <a className="iconArrow" onClick={rotateLeft}>
-              <img draggable={false} src={require("./static/leftArrow.png")} />
-            </a>
-            <a className="iconArrow" onClick={rotateRight}>
-              <img draggable={false} src={require("./static/rightArrow.png")} />
-            </a>
-          </div>
-        </div>
-        <div className="slider-blog">
-          <img
-            draggable={false}
-            src={images[currentImages[0]]}
-            alt="slider-img-blog"
-            className="slider-blog-img"
-          />
-          <img
-            draggable={false}
-            src={images[currentImages[1]]}
-            alt="slider-img-blog"
-            className="slider-blog-img1"
-          />
-          <img
-            draggable={false}
-            src={images[currentImages[2]]}
-            alt="slider-img-blog"
-            className="slider-blog-img"
-          />
-        </div>
-      </div>
+        <div className="seccion-blog">
+          <div className="sec1-blog">
+            <div className="text-btn-blog">
+              <div className="textos-blog">
+                <h1>
+                  Consejos
+                  <br />
+                  únicos te
+                  <br />
+                  esperan en
+                  <br />
+                  nuestro blog
+                </h1>
+              </div>
+              <div className="botones-blog">
+                <a
+                  href="https://blog.compara-seguro.com"
+                  className="ver-mas-art"
+                  target="_blank"
+                >
+                  Ver más artículos
+                </a>
+                <a className="iconArrow" onClick={rotateLeft}>
+                  <img
+                    draggable={false}
+                    src={require("./static/leftArrow.png")}
+                  />
+                </a>
+                <a className="iconArrow" onClick={rotateRight}>
+                  <img
+                    draggable={false}
+                    src={require("./static/rightArrow.png")}
+                  />
+                </a>
+              </div>
+            </div>
+            {entries.length > 0 && (
+              <div className="slider-blog">
+                <div className="card-blog">
+                  <div
+                    alt="slider-img-blog"
+                    className="slider-blog-img"
+                    style={{
+                      backgroundImage:
+                        "url(" +
+                        entries[currentIndex].better_featured_image
+                          .media_details.sizes.thumbnail.source_url +
+                        ")",
+                    }}
+                  >
+                    <a href={entries[currentIndex].link} target="_blank">
+                      {entries[currentIndex].title.rendered}
+                    </a>
+                    <p>{entries[currentIndex].date}</p>
+                  </div>
+                </div>
 
-      <div className="curva-blog"></div>
-    </div>
+                <div className="card-blog1">
+                  <div
+                    alt="slider-img-blog"
+                    className="slider-blog-img1"
+                    style={{
+                      backgroundImage:
+                        "url(" +
+                        entries[(currentIndex + 1) % entries.length]
+                          .better_featured_image.media_details.sizes.thumbnail
+                          .source_url +
+                        ")",
+                    }}
+                  >
+                    <a
+                      href={entries[(currentIndex + 1) % entries.length].link}
+                      target="_blank"
+                    >
+                      {
+                        entries[(currentIndex + 1) % entries.length].title
+                          .rendered
+                      }
+                    </a>
+                    <p>{entries[(currentIndex + 1) % entries.length].date}</p>
+                  </div>
+                </div>
+
+                <div className="card-blog">
+                  <div
+                    alt="slider-img-blog"
+                    className="slider-blog-img"
+                    style={{
+                      backgroundImage:
+                        "url(" +
+                        entries[(currentIndex + 2) % entries.length]
+                          .better_featured_image.media_details.sizes.thumbnail
+                          .source_url +
+                        ")",
+                    }}
+                  >
+                    <a
+                      href={entries[(currentIndex + 2) % entries.length].link}
+                      target="_blank"
+                    >
+                      {
+                        entries[(currentIndex + 2) % entries.length].title
+                          .rendered
+                      }
+                    </a>
+                    <p>{entries[(currentIndex + 2) % entries.length].date}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="curva-blog"></div>
+        </div>
       </MediaQuery>
       <MediaQuery orientation={"portrait"}>
         <div className="seccion-blog">
@@ -1901,17 +1857,21 @@ function Home() {
               </h1>
             </div>
             <div className="botones-blog">
-              <a href="#" className="ver-mas-art">
+              <a
+                href="https://blog.compara-seguro.com"
+                className="ver-mas-art"
+                target="_blank"
+              >
                 Ver más artículos
               </a>
               <div className="botones-slider">
-                <a className="iconArrow">
+                <a className="iconArrow" onClick={rotateLeft}>
                   <img
                     draggable={false}
                     src={require("./static/leftArrow.png")}
                   />
                 </a>
-                <a className="iconArrow">
+                <a className="iconArrow" onClick={rotateRight}>
                   <img
                     draggable={false}
                     src={require("./static/rightArrow.png")}
@@ -1920,26 +1880,28 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="slider-blog">
-            <img
-              draggable={false}
-              src={require("./static/piezas/PIEZAS GRAFICAS WEB - COMPARASEGURO-13.png")}
-              alt="slider-img-blog"
-              className="slider-blog-img"
-            />
-            <img
-              draggable={false}
-              src={require("./static/PIEZAS GRAFICAS WEB - COMPARASEGURO-13 mobile.png.png")}
-              alt="slider-img-blog"
-              className="slider-blog-img1"
-            />
-            <img
-              draggable={false}
-              src={require("./static/piezas/PIEZAS GRAFICAS WEB - COMPARASEGURO-13.png")}
-              alt="slider-img-blog"
-              className="slider-blog-img"
-            />
-          </div>
+          {entries.length > 0 && (
+            <div className="slider-blog">
+              <div className="card-blog">
+                <div
+                  alt="slider-img-blog"
+                  className="slider-blog-img"
+                  style={{
+                    backgroundImage:
+                      "url(" +
+                      entries[currentIndex].better_featured_image.media_details
+                        .sizes.thumbnail.source_url +
+                      ")",
+                  }}
+                >
+                  <a href={entries[currentIndex].link} target="_blank">
+                    {entries[currentIndex].title.rendered}
+                  </a>
+                  <p>{entries[currentIndex].date}</p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </MediaQuery>
       <MediaQuery orientation={"landscape"}>
@@ -1950,38 +1912,6 @@ function Home() {
             aliados
           </span>
           <SliderSponsors />
-          {/* <div className="iconContent">
-            <img
-              draggable={false}
-              className="iconSponsor"
-              src={require("./static/sponsor1.png")}
-            />
-            <img
-              draggable={false}
-              className="iconSponsor"
-              src={require("./static/sponsor2.png")}
-            />
-            <img
-              draggable={false}
-              className="iconSponsor"
-              src={require("./static/sponsor3.png")}
-            />
-            <img
-              draggable={false}
-              className="iconSponsor"
-              src={require("./static/sponsor4.png")}
-            />
-            <img
-              draggable={false}
-              className="iconSponsor"
-              src={require("./static/sponsor5.png")}
-            />
-            <img
-              draggable={false}
-              className="iconSponsor"
-              src={require("./static/sponsor6.png")}
-            />
-          </div> */}
         </div>
       </MediaQuery>
       <MediaQuery orientation={"portrait"}>
@@ -1993,18 +1923,7 @@ function Home() {
             <br />
             nuestros aliados
           </span>
-          <div className="iconContent">
-            <img
-              draggable={false}
-              className="iconSponsor"
-              src={require("./static/sponsor1.png")}
-            />
-            <img
-              draggable={false}
-              className="iconSponsor"
-              src={require("./static/sponsor2.png")}
-            />
-          </div>
+          <SliderSponsors />
         </div>
       </MediaQuery>
 
@@ -2033,11 +1952,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accord-2">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="1">
                   <Accordion.Header>¿Esta es la pregunta 2?</Accordion.Header>
                   <Accordion.Body>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -2050,11 +1965,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accord-3">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="2">
                   <Accordion.Header>¿Esta es la pregunta 3?</Accordion.Header>
                   <Accordion.Body>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -2067,11 +1978,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accord-4">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="3">
                   <Accordion.Header>¿Esta es la pregunta 4?</Accordion.Header>
                   <Accordion.Body>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -2084,11 +1991,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accord-5">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="4">
                   <Accordion.Header>¿Esta es la pregunta 5?</Accordion.Header>
                   <Accordion.Body>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -2101,11 +2004,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accord-6">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="5">
                   <Accordion.Header>¿Esta es la pregunta 6?</Accordion.Header>
                   <Accordion.Body>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -2144,11 +2043,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accord-2">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="1">
                   <Accordion.Header>¿Esta es la pregunta 2?</Accordion.Header>
                   <Accordion.Body>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -2161,11 +2056,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accord-3">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="2">
                   <Accordion.Header>¿Esta es la pregunta 3?</Accordion.Header>
                   <Accordion.Body>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -2178,11 +2069,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accord-4">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="3">
                   <Accordion.Header>¿Esta es la pregunta 4?</Accordion.Header>
                   <Accordion.Body>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -2195,11 +2082,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accord-5">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="4">
                   <Accordion.Header>¿Esta es la pregunta 5?</Accordion.Header>
                   <Accordion.Body>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -2212,11 +2095,7 @@ function Home() {
                     deserunt mollit anim id est laborum.
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
-            </div>
-            <div className="accord-6">
-              <Accordion>
-                <Accordion.Item eventKey="0">
+                <Accordion.Item eventKey="5">
                   <Accordion.Header>¿Esta es la pregunta 6?</Accordion.Header>
                   <Accordion.Body>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed

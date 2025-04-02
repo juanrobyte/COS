@@ -40,10 +40,10 @@ function Footer() {
                 <p id="company-btn">
                   Compañía
                 </p>
-                <a href="#">Conócenos</a>
+                <a href="/nosotros">Conócenos</a>
                 <a href="#">Forma parte</a>
                 <a href="#">Contáctanos</a>
-                <a href="#">Asistencia Médica</a>
+                <a href="https://web.compara-seguro.com">Asistencia Médica</a>
               </div>
               <div className="asesoria-btn">
                 <a href="#">Asesoría en compra</a>
@@ -96,7 +96,6 @@ function Footer() {
                   <input
                     placeholder="Ingresa tu email"
                     type="text"
-                    style={{ color: "#009C8C", textAlign: "center" }}
                   />
                 </div>
                 <button type="submit" className="suscribirme">
@@ -123,7 +122,7 @@ function Footer() {
           <div className="logo-cos-redes">
             <a href="/">
               <img
-                src={require("../static/CS alternativo2 blanco.png")}
+                src={logo}
                 className="logo-compara"
               />
             </a>
@@ -144,7 +143,7 @@ function Footer() {
                   <a href="/nosotros">Conócenos</a>
                   <a href="#">Forma parte</a>
                   <a href="#">Contáctanos</a>
-                  <a href="#">Asistencia Médica</a>
+                  <a href="https://web.compara-seguro.com">Asistencia Médica</a>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>

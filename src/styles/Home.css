@@ -109,7 +109,8 @@
 }
 
 .rs-picker-toggle-placeholder {
-  color: #000 !important; /* Color negro para el placeholder */
+  color: #000 !important;
+  /* Color negro para el placeholder */
 }
 
 .rs-picker-input-group .rs-input:focus {
@@ -135,7 +136,8 @@
 }
 
 .rs-picker-toolbar-right {
-  order: 2; /* Mueve el botón "Aplicar" a la izquierda */
+  order: 2;
+  /* Mueve el botón "Aplicar" a la izquierda */
 }
 
 .rs-calendar-table-cell-is-today .rs-calendar-table-cell-content {
@@ -245,7 +247,7 @@
   font-weight: 900;
   line-height: 78.02px;
   text-align: left;
-  color: #008dc7;
+  color: #2c1fbd;
 }
 
 .promociones-slide {
@@ -283,8 +285,8 @@
 
 .iosCard {
   border-radius: 40px;
-  width: 390px;
-  height: 178px;
+  width: 24.4rem;
+  height: 11.1rem;
   padding: 15px;
   background-color: #fff;
   box-shadow: #0000002f 0px 4px 16px 0px;
@@ -320,7 +322,7 @@
 }
 
 .titleHeadline {
-  color: #009c8c;
+  color: #2c1fbd;
   font-size: 64px;
   font-family: "Montserrat" !important;
   font-weight: 800;
@@ -351,7 +353,7 @@
   font-weight: 900;
   line-height: 78.02px;
   text-align: left;
-  color: #009c8c;
+  color: #2c1fbd;
 }
 
 .nuestros-seguros-acordeones {
@@ -360,6 +362,12 @@
   justify-content: space-around;
   width: 45%;
   height: auto;
+}
+
+.seccion-nuestros-seguros .accordion {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .nuestros-seguros-acordeones .accordion-button {
@@ -433,6 +441,10 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+}
+
+.sponsors .slick-arrow {
+  display: none !important;
 }
 
 .iconSponsor {
@@ -572,7 +584,7 @@
 }
 
 .textos-blog {
-  color: #008dc7;
+  color: #2c1fbd;
   padding: 5rem 0;
 }
 
@@ -612,18 +624,140 @@ a:hover {
   align-items: center;
 }
 
+.card-blog {
+  display: flex;
+  width: 230px;
+  height: 265px;
+  border: 12px solid #f3f3f3;
+  border-radius: 100px;
+  background: white;
+  box-shadow: 0px 4px 12px 3px #00000030;
+}
+
+.card-blog1 {
+  display: flex;
+  width: 265px;
+  height: 300px;
+  border: 12px solid #f3f3f3;
+  border-radius: 101px;
+  background: transparent;
+  box-shadow: 0px 4px 12px 3px #00000030;
+}
+
 .slider-blog-img {
-  width: 100px;
-  height: 50px;
-  margin: 0 10px;
-  transition: all 0.5s ease;
+  display: flex;
+  position: relative;
+  top: 0px;
+  width: 230px;
+  height: 242px;
+  border: 11px;
+  border-radius: 90px 90px 90px 90px;
+  padding: 15px;
+  background: #f0f0f0b8;
+  box-shadow: 0px 5px 5px 0px #00000040 inset;
+  transition: all 0.5s ease-out;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  justify-content: space-around;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.slider-blog-img a {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.15rem;
+  color: #2c1fbd;
+  text-align: justify;
+}
+
+.slider-blog-img a:hover {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.15rem;
+  color: #fff;
+}
+
+.slider-blog-img a:focus {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.15rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.slider-blog-img a:active {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.15rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.slider-blog-img p {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 0.9rem;
 }
 
 .slider-blog-img1 {
-  width: 250px;
-  height: 150px;
-  margin: 0 10px;
-  transition: all 0.5s ease;
+  display: flex;
+  width: 241px;
+  height: 276px;
+  border: 11px;
+  border-radius: 90px 90px 90px 90px;
+  padding: 15px;
+  background: #f0f0f0b8;
+  box-shadow: 0px 5px 5px 0px #00000040 inset;
+  transition: all 0.5s ease-in-out;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  justify-content: space-around;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.slider-blog-img1 a {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.15rem;
+  color: #2c1fbd;
+  text-align: justify;
+}
+
+.slider-blog-img1 a:hover {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.15rem;
+  color: #fff;
+}
+
+.slider-blog-img1 a:focus {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.15rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.slider-blog-img1 a:active {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.15rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.slider-blog-img1 p {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 0.9rem;
 }
 
 .curva-blog {
@@ -638,13 +772,13 @@ a:hover {
 
 .seccion-preguntas-frecuentes {
   background: #fff;
-  width: auto;
-  height: 65vh;
+  width: 100%;
+  height: 75vh;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding: 0 5rem;
-  margin: 50px 0 50px 0;
+  margin: 50px 0 120px 0;
 }
 
 .titulo-preguntas-frecuentes {
@@ -663,7 +797,7 @@ a:hover {
   font-weight: 900;
   line-height: 78.02px;
   text-align: left;
-  color: #009c8c;
+  color: #2c1fbd;
 }
 
 .preguntas-acordeones {
@@ -671,15 +805,25 @@ a:hover {
   flex-direction: column;
   justify-content: space-around;
   width: 50%;
+  height: 100%;
+}
+
+.seccion-preguntas-frecuentes .accordion {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  width: auto;
   height: auto;
 }
 
 .slick-slider {
-  width: 100%; /*NO TOCAR! sino el slider no se podrá vizualizar*/
+  width: 100%;
+  /*NO TOCAR! sino el slider no se podrá vizualizar*/
 }
 
 .css-1u9des2-indicatorSeparator {
-  display: none !important; /* Elimina el separador del dropdown */
+  display: none !important;
+  /* Elimina el separador del dropdown */
 }
 
 .preguntas-acordeones .accordion-button {
@@ -721,12 +865,27 @@ a:hover {
   width: 25%;
 }
 
+.origen input::placeholder {
+  color: #000 !important;
+  font-weight: 600 !important;
+}
+
+.destino input::placeholder {
+  color: #000 !important;
+  font-weight: 600 !important;
+}
+
 .fechainit-fechaend {
   width: 45%;
 }
 
 .fechainit-fechaend img {
   margin-left: 10px;
+}
+
+.fechainit-fechaend input::placeholder {
+  color: #000 !important;
+  font-weight: 600 !important;
 }
 
 .passengersAmount {
@@ -737,12 +896,27 @@ a:hover {
   width: 25%;
 }
 
+.email input::placeholder {
+  color: #000 !important;
+  font-weight: 600 !important;
+}
+
 .phoneNumber {
   width: 22%;
 }
 
+.phoneNumber input::placeholder {
+  color: #000 !important;
+  font-weight: 600 !important;
+}
+
 .coupon {
   width: 20%;
+}
+
+.coupon input::placeholder {
+  color: #000 !important;
+  font-weight: 600 !important;
 }
 
 .rs-stack {
@@ -767,13 +941,57 @@ a:hover {
   z-index: 1;
 }
 
+/* Ajustes generales para el input y la bandera */
+.iti {
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+  position: relative;
+}
+
+.iti__flag-container {
+  position: absolute;
+  left: 10px; /* Ajusta la posición según sea necesario */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2; /* Asegura que la bandera esté visible */
+  width: 30px; /* Ajusta el tamaño del contenedor de la bandera */
+  height: 20px;
+}
+
+.iti__flag {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+/* Ajustes específicos para móviles en orientación portrait */
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+  .phoneNumber {
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+    padding-left: 50px; /* Deja espacio suficiente para la bandera */
+  }
+
+  .iti__flag-container {
+    left: 10px; /* Ajusta la posición según sea necesario */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px; /* Asegura que el tamaño del contenedor sea adecuado */
+    height: 20px;
+  }
+
+  .iti__flag {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+  }
+}
+
 /*  RESPONSIVE HOME */
 
-@media (max-width: 1700px) and (orientation: landscape) {
+@media (min-width: 1280px) and (max-width: 1440px) {
   .seccion-comparador {
     position: absolute;
     left: 13vw;
-    top: 35vh;
+    top: 32.5%;
     background: white;
     border-radius: 30px;
     width: 80%;
@@ -781,7 +999,56 @@ a:hover {
     box-shadow: #a2a2a28f 6px 6px 20px 0px;
     z-index: 3;
   }
+  
+  .titulo-servicios h1 {
+    font-size: 3rem;
+  }
+  
+  .titulo-promociones h1 {
+    font-size: 3rem;
+  }
+
+  .titleHeadline {
+    font-size: 3rem;
+  }
+
+  .seccion-nuestros-seguros {
+    height: 80vh;
+  }
+
+  .titulo-nuestros-seguros h1 {
+    font-size: 3rem;
+  }
+
+  .seccion-opinion-clientes {
+    background-image: url("../static/curva-opiniones.svg");
+    height: 205px;
+  }
+
+  .seccion-blog {
+    background-image: url("../static/FONDO MAPAMUNDI MAC.png");
+    width: 100%;
+  }
+
+  .sec1-blog {
+    height: 100%;
+  }
+
+  .text-btn-blog {
+    width: 30%;
+    align-items: self-end;
+  }
+
+  .slider-blog {
+    justify-content: space-evenly;
+    width: 70%;
+  }
+
+  .titulo-preguntas-frecuentes h1 {
+    font-size: 3rem;
+  }
 }
+
 @media (orientation: portrait) {
   .rs-input-group.rs-input-group-inside .rs-input {
     width: 100% !important;
@@ -880,8 +1147,9 @@ a:hover {
     flex-direction: column;
     justify-items: center;
     justify-content: center;
-    height: 50vh;
+    height: auto;
     width: 100%;
+    padding: 0 !important;
   }
 
   .titulo-promociones {
@@ -892,7 +1160,9 @@ a:hover {
     gap: 0;
     text-align: center;
     width: 100%;
-    height: auto;
+    height: 50%;
+    margin: 0;
+    padding: 5rem 0 2rem 0;
   }
 
   .titulo-promociones h1 {
@@ -904,10 +1174,12 @@ a:hover {
   .promociones-slide {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     height: 50%;
     width: 100%;
+    padding: 0 0 2rem 0;
+    margin: 0;
   }
 
   .seccion-whychooseus {
@@ -915,6 +1187,7 @@ a:hover {
     height: auto;
     display: flex;
     flex-direction: column;
+    padding: 3rem 0;
   }
 
   .titleHeadline {
@@ -927,6 +1200,7 @@ a:hover {
   .content-cards {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
 
   .title-card {
@@ -946,9 +1220,13 @@ a:hover {
     flex-direction: column;
     gap: 30px;
     padding: 0;
+    align-items: center;
+    margin-bottom: 3rem;
+    margin-top: 1rem;
   }
 
   .titulo-nuestros-seguros {
+    width: 100%;
     display: flex;
     flex-direction: row;
     text-align: center;
@@ -986,24 +1264,23 @@ a:hover {
     line-height: 20px !important;
   }
 
-  /* .seccion-opinion-clientes {
-        width: 100%;
-        height: 10vh;
-        display: flex;
-        flex-direction: column;
-    } */
+  .seccion-opinion-clientes {
+    width: 100%;
+    height: 3.8rem;
+    background-image: url("../static/Frame - Curva-4.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
 
   .opinion-clientes {
     width: 100%;
-    height: 80vh;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-image: url(../static/PIEZAS GRAFICAS WEB - COMPARASEGURO_Mesa de trabajo mobile 2.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(90deg, #5dbca3 0%, #008dc7 100%);
   }
 
   .titulo-opiniones-clientes {
@@ -1025,20 +1302,21 @@ a:hover {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    width: 50%;
   }
 
   .opinion-1 {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .opinion-1 img {
     display: flex;
-    align-self: flex-start;
-    height: 70px;
-    width: 200px;
+    align-self: center;
+    height: auto;
+    width: 100%;
   }
 
   .opinion-1 h1 {
@@ -1046,7 +1324,7 @@ a:hover {
     font-size: 20px;
     font-weight: 800;
     line-height: 24px;
-    text-align: left;
+    text-align: center;
   }
 
   .opinion-1 .opinion-textos {
@@ -1054,6 +1332,7 @@ a:hover {
     height: 88px;
     gap: 0px;
     opacity: 0px;
+    text-align: center;
   }
 
   .click-opinion p {
@@ -1074,10 +1353,10 @@ a:hover {
 
   .seccion-blog {
     width: 100%;
-    height: 90vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    background-image: url(../static/FONDO\ MAPAMUNDI.png);
+    background-image: url(../static/PIEZAS GRAFICAS WEB - COMPARASEGURO_Mesa de trabajo_1_mobile.png);
   }
 
   .text-btn-blog {
@@ -1124,11 +1403,13 @@ a:hover {
   }
 
   .slider-blog-img {
-    display: none;
+    width: 230px;
+    height: 242px;
   }
 
   .slider-blog-img1 {
-    height: 300px;
+    width: 230px;
+    height: 242px;
   }
 
   .sponsors {
@@ -1154,6 +1435,7 @@ a:hover {
     align-items: center;
     gap: 30px;
     padding: 0;
+    margin: 0;
     margin-bottom: 10%;
   }
 
@@ -1188,6 +1470,7 @@ a:hover {
   .iosCard {
     width: 80%;
     padding: 15px 20px;
+    height: 6.3rem;
   }
 
   /* MODAL COTIZADOR */
@@ -1219,9 +1502,11 @@ a:hover {
     position: sticky;
     bottom: 0;
   }
+
   .clear {
     color: #2c1fbd;
   }
+
   .comparar {
     background: #2c1fbd;
     padding: 12px 16px;
@@ -1279,24 +1564,29 @@ a:hover {
     text-align: center;
     font-weight: 600;
   }
+
   .fullHeight {
     width: 100%;
     height: 60vh;
     transition-duration: 300ms;
   }
+
   .closed {
     display: flex !important;
     height: auto;
     transition-duration: 450ms;
   }
+
   .containerOption {
     width: 100%;
     display: flex;
     justify-content: center;
   }
+
   #inicio .modal-container {
     background: #eff8f5;
   }
+
   .goBackArrow {
     width: 1rem;
     height: 1.5rem;
